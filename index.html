@@ -2,101 +2,106 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Quantum Playground - The Science Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Playground | Science Sim Hub</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header>
     <h1>Quantum Playground</h1>
-    <div class="search-bar">
-      <input type="text" placeholder="Search 60+ simulations and topics...">
-    </div>
+    <p>Comprehensive Science Directory for Kenyan Students</p>
   </header>
 
-  <nav>
-    <a href="#physics">Physics</a>
-    <a href="#chemistry">Chemistry</a>
-    <a href="#biology">Biology</a>
-    <a href="#tools">Simulations</a>
-  </nav>
+  <div class="peak-search-container">
+    <input type="text" class="search-input" placeholder="Search 60+ topics like 'Ohm's Law', 'DNA', 'Acids'...">
+    <div class="filter-group">
+      <button class="filter-btn">All Subjects</button>
+      <button class="filter-btn">Physics</button>
+      <button class="filter-btn">Chemistry</button>
+      <button class="filter-btn">Biology</button>
+    </div>
+  </div>
 
   <main>
-    <section id="physics" class="glass-card">
+    <section class="subject-card">
       <h2>🔭 Physics</h2>
-      <p>From the mechanics of a Nairobi matatu to the quantum level.</p>
+      <p>Exploring the mechanics of the universe, from gravity to electricity.</p>
       
-      <ul>
-        <li><strong>Mechanics:</strong> Newton's Laws ($F=ma$), Momentum ($p=mv$), and Projectiles.</li>
-        <li><strong>Thermodynamics:</strong> Gas laws and heat transfer ($Q=mc\Delta T$).</li>
-        <li><strong>Electricity:</strong> Ohm's Law ($V=IR$) and Circuitry.</li>
-      </ul>
-      
-    </section>
-
-    <section id="chemistry" class="glass-card">
-      <h2>🧪 Chemistry</h2>
-      <p>Matter and its incredible transformations.</p>
-      
-      <ul>
-        <li><strong>Atomic Structure:</strong> Isotopes, Ions, and the Periodic Table.</li>
-        <li><strong>States of Matter:</strong> Phase changes and Gas properties ($PV=nRT$).</li>
-        <li><strong>Acids & Bases:</strong> The pH scale and Titrations.</li>
-      </ul>
-      
-    </section>
-
-    <section id="biology" class="glass-card">
-      <h2>🧬 Biology</h2>
-      <p>The machinery of life from cells to ecosystems.</p>
-      
-      <ul>
-        <li><strong>Genetics:</strong> DNA structure and Gene expression.</li>
-        <li><strong>Cell Biology:</strong> Photosynthesis, Osmosis, and Respiration.</li>
-        <li><strong>Ecology:</strong> Evolution and Natural Selection.</li>
-      </ul>
-      
-    </section>
-
-    <section id="tools" class="glass-card">
-      <h2>🎮 Interactive Simulations (60 Topics)</h2>
-      <div class="grid-container">
-        <div class="sim-item">Projectile Motion</div>
-        <div class="sim-item">Forces & Motion</div>
-        <div class="sim-item">Energy Skate Park</div>
-        <div class="sim-item">Circuit Construction</div>
-        <div class="sim-item">Ohm's Law</div>
-        <div class="sim-item">Bending Light</div>
-        <div class="sim-item">Hooke's Law</div>
-        <div class="sim-item">Gravity & Orbits</div>
-        <div class="sim-item">Balancing Act</div>
-        <div class="sim-item">Pendulum Lab</div>
-        <div class="sim-item">Build an Atom</div>
-        <div class="sim-item">States of Matter</div>
-        <div class="sim-item">pH Scale</div>
-        <div class="sim-item">Molarity</div>
-        <div class="sim-item">Gas Properties</div>
-        <div class="sim-item">Beer's Law</div>
-        <div class="sim-item">Isotopes</div>
-        <div class="sim-item">Molecule Polarity</div>
-        <div class="sim-item">Atomic Interactions</div>
-        <div class="sim-item">Balancing Chemical Equations</div>
-        <div class="sim-item">Natural Selection</div>
-        <div class="sim-item">Gene Expression</div>
-        <div class="sim-item">Neuron Simulation</div>
-        <div class="sim-item">Color Vision</div>
-        <div class="sim-item">Membrane Channels</div>
-        <div class="sim-item">Photosynthesis</div>
-        <div class="sim-item">Cell Respiration</div>
-        <div class="sim-item">Eating & Exercise</div>
-        <div class="sim-item">Vision Lab</div>
-        <div class="sim-item">Antibiotic Resistance</div>
+      <div class="sim-grid">
+        <div class="sim-tile">
+          <h4>Forces & Motion</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html"></iframe>
         </div>
+        <div class="sim-tile">
+          <h4>Projectile Motion</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html"></iframe>
+        </div>
+        <div class="sim-tile">
+          <h4>Energy Skate Park</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html"></iframe>
+        </div>
+        <div class="sim-tile">
+          <h4>Bending Light</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html"></iframe>
+        </div>
+      </div>
+      
+    </section>
+
+    <section class="subject-card">
+      <h2>🧪 Chemistry</h2>
+      <p>Atomic structure, chemical reactions, and the states of matter.</p>
+      
+      <div class="sim-grid">
+        <div class="sim-tile">
+          <h4>Build an Atom</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html"></iframe>
+        </div>
+        <div class="sim-tile">
+          <h4>States of Matter</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html"></iframe>
+        </div>
+        <div class="sim-tile">
+          <h4>pH Scale: Basics</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/ph-scale-basics/latest/ph-scale-basics_en.html"></iframe>
+        </div>
+        <div class="sim-tile">
+          <h4>Molarity</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/molarity/latest/molarity_en.html"></iframe>
+        </div>
+      </div>
+      
+    </section>
+
+    <section class="subject-card">
+      <h2>🧬 Biology</h2>
+      <p>Investigating cell biology, genetic inheritance, and evolution.</p>
+      
+      <div class="sim-grid">
+        <div class="sim-tile">
+          <h4>Natural Selection</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html"></iframe>
+        </div>
+        <div class="sim-tile">
+          <h4>Gene Expression</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_en.html"></iframe>
+        </div>
+        <div class="sim-tile">
+          <h4>Color Vision</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_en.html"></iframe>
+        </div>
+        <div class="sim-tile">
+          <h4>Neuron</h4>
+          <iframe src="https://phet.colorado.edu/sims/html/neuron/latest/neuron_en.html"></iframe>
+        </div>
+      </div>
+      
     </section>
   </main>
 
   <footer>
-    <p>© 2026 Developed by <strong>Malcolm and Yens</strong> | Nairobi, Kenya 🚀</p>
+    <p>© 2026 Developed by **Malcolm and Yens** | Quantum Playground Nairobi 🚀</p>
   </footer>
 
 </body>
