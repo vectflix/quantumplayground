@@ -1,145 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quantum Playground | Full PhET Library</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+  margin: 0;
+  background: radial-gradient(circle at top, #1e1b4b, #020617);
+  background-attachment: fixed;
+  color: #f1f5f9;
+  overflow-x: hidden;
+}
 
-  <header>
-    <h1>Quantum Playground</h1>
-    <p>Comprehensive Science Directory for Students</p>
-  </header>
+header {
+  padding: 50px 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-  <div class="peak-search-container">
-    <input type="text" class="search-input" id="mainSearch" placeholder="Search across all 60+ PhET simulations..." onkeyup="searchSimulations()">
-    <div class="filter-group">
-      <button class="filter-btn active" id="btn-all" onclick="filterScience('all')">All</button>
-      <button class="filter-btn" id="btn-physics" onclick="filterScience('physics')">Physics</button>
-      <button class="filter-btn" id="btn-chemistry" onclick="filterScience('chemistry')">Chemistry</button>
-      <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">Biology</button>
-    </div>
-  </div>
+.peak-search-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: -35px auto 40px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(30px);
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
 
-  <main id="content-main">
-    <section id="physics-sec" class="subject-card science-section">
-      <h2>🔭 Physics</h2>
-      <div class="summary-notes">
-        <p><strong>Formulae:</strong> $F=ma$ | $V=IR$ | $p=mv$ | $E=mc^2$ | $f = 1/T$</p>
-      </div>
-      
-      <div class="sim-grid">
-        <div class="sim-tile" data-keywords="forces motion friction newton"><h4>Forces and Motion</h4><iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="gravity orbit space earth"><h4>Gravity and Orbits</h4><iframe src="https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="projectile launch gravity"><h4>Projectile Motion</h4><iframe src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="circuit energy battery light"><h4>Circuit Construction Kit</h4><iframe src="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="energy skate kinetic potential"><h4>Energy Skate Park</h4><iframe src="https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="ohm voltage current resistance"><h4>Ohm's Law</h4><iframe src="https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="waves sound frequency water"><h4>Waves Intro</h4><iframe src="https://phet.colorado.edu/sims/html/waves-intro/latest/waves-intro_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="pendulum swing time gravity"><h4>Pendulum Lab</h4><iframe src="https://phet.colorado.edu/sims/html/pendulum-lab/latest/pendulum-lab_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="gas pressure heat volume"><h4>Gas Properties</h4><iframe src="https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="light bend prism glass"><h4>Bending Light</h4><iframe src="https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="mass density sink float"><h4>Density</h4><iframe src="https://phet.colorado.edu/sims/html/density/latest/density_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="static charge balloon electricity"><h4>Static Electricity</h4><iframe src="https://phet.colorado.edu/sims/html/balloons-and-static-electricity/latest/balloons-and-static-electricity_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="faraday magnet induction coil"><h4>Faraday's Law</h4><iframe src="https://phet.colorado.edu/sims/html/faradays-law/latest/faradays-law_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="hooke spring elastic stretch"><h4>Hooke's Law</h4><iframe src="https://phet.colorado.edu/sims/html/hookes-law/latest/hookes-law_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="collision momentum elastic"><h4>Collision Lab</h4><iframe src="https://phet.colorado.edu/sims/html/collision-lab/latest/collision-lab_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="torque balance lever weight"><h4>Balancing Act</h4><iframe src="https://phet.colorado.edu/sims/html/balancing-act/latest/balancing-act_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="rutherford atom nucleus gold"><h4>Rutherford Scattering</h4><iframe src="https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="blackbody radiation light heat"><h4>Blackbody Spectrum</h4><iframe src="https://phet.colorado.edu/sims/html/blackbody-spectrum/latest/blackbody-spectrum_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="capacitor charge voltage"><h4>Capacitor Lab</h4><iframe src="https://phet.colorado.edu/sims/html/capacitor-lab-basics/latest/capacitor-lab-basics_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="vector addition math force"><h4>Vector Addition</h4><iframe src="https://phet.colorado.edu/sims/html/vector-addition/latest/vector-addition_en.html"></iframe></div>
-      </div>
-      
-    </section>
+.search-input {
+  width: 100%;
+  padding: 15px 25px;
+  border-radius: 40px;
+  border: 2px solid #3b82f6;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1.1em;
+  outline: none;
+  box-sizing: border-box;
+}
 
-    <section id="chemistry-sec" class="subject-card science-section">
-      <h2>🧪 Chemistry</h2>
-      <div class="summary-notes">
-        <p><strong>Formulae:</strong> $PV=nRT$ | $pH = -\log[H^+]$ | $n = m/M$ | $M = n/V$</p>
-      </div>
-      
-      <div class="sim-grid">
-        <div class="sim-tile" data-keywords="atom proton neutron electron build"><h4>Build an Atom</h4><iframe src="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="solid liquid gas phase heat"><h4>States of Matter</h4><iframe src="https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="acid base pH scale titration"><h4>pH Scale</h4><iframe src="https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="react balance equation chemical"><h4>Balancing Equations</h4><iframe src="https://phet.colorado.edu/sims/html/balancing-chemical-equations/latest/balancing-chemical-equations_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="molarity concentration dissolve solute"><h4>Molarity</h4><iframe src="https://phet.colorado.edu/sims/html/molarity/latest/molarity_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="isotope mass atomic nucleus"><h4>Isotopes</h4><iframe src="https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="molecule shape geometry vsepr"><h4>Molecule Shapes</h4><iframe src="https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="diffusion particles motion mix"><h4>Diffusion</h4><iframe src="https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="beer law absorb light color"><h4>Beer's Law Lab</h4><iframe src="https://phet.colorado.edu/sims/html/beers-law-lab/latest/beers-law-lab_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="alpha decay radiation nucleus"><h4>Alpha Decay</h4><iframe src="https://phet.colorado.edu/sims/html/alpha-decay/latest/alpha-decay_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="beta decay radiation nucleus"><h4>Beta Decay</h4><iframe src="https://phet.colorado.edu/sims/html/beta-decay/latest/beta-decay_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="polarity dipole molecule bond"><h4>Molecule Polarity</h4><iframe src="https://phet.colorado.edu/sims/html/molecule-polarity/latest/molecule-polarity_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="titration neutralize acid base"><h4>Acid-Base Solutions</h4><iframe src="https://phet.colorado.edu/sims/html/acid-base-solutions/latest/acid-base-solutions_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="build molecule chemical bond"><h4>Build a Molecule</h4><iframe src="https://phet.colorado.edu/sims/html/build-a-molecule/latest/build-a-molecule_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="concentration solute solvent dissolve"><h4>Concentration</h4><iframe src="https://phet.colorado.edu/sims/html/concentration/latest/concentration_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="reactants products leftover chemical"><h4>Reactants & Leftovers</h4><iframe src="https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="gas property pressure temperature"><h4>Gas Properties</h4><iframe src="https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html"></iframe></div>
-      </div>
-      
-    </section>
+.filter-group {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
 
-    <section id="biology-sec" class="subject-card science-section">
-      <h2>🧬 Biology</h2>
-      <div class="summary-notes">
-        <p><strong>Concepts:</strong> Natural Selection | DNA Transcription | Photosynthesis | Nerve Impulses</p>
-      </div>
-      
-      <div class="sim-grid">
-        <div class="sim-tile" data-keywords="evolution rabbit selection nature"><h4>Natural Selection</h4><iframe src="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="dna gene protein rna"><h4>Gene Expression</h4><iframe src="https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="neuron brain nerve signal"><h4>Neuron</h4><iframe src="https://phet.colorado.edu/sims/html/neuron/latest/neuron_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="cell membrane channel ion"><h4>Membrane Channels</h4><iframe src="https://phet.colorado.edu/sims/html/membrane-channels/latest/membrane-channels_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="eye vision color light"><h4>Color Vision</h4><iframe src="https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_en.html"></iframe></div>
-      </div>
-      
-    </section>
-  </main>
+.filter-btn {
+  background: rgba(59, 130, 246, 0.1);
+  color: white;
+  border: 1px solid #3b82f6;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
 
-  <footer>
-    <p>© 2026 Developed by <strong>Malcolm and Yens</strong> | Quantum Playground 🚀</p>
-    <p><small>Cookies Policy | My Account | Search Bar Enabled</small></p>
-  </footer>
+.filter-btn.active, .filter-btn:hover {
+  background: #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
 
-  <script>
-    function searchSimulations() {
-      const input = document.getElementById('mainSearch').value.toLowerCase();
-      const tiles = document.querySelectorAll('.sim-tile');
-      const sections = document.querySelectorAll('.science-section');
-      let foundAny = false;
+.subject-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(25px);
+  border-radius: 30px;
+  padding: 30px;
+  margin: 0 auto 50px;
+  max-width: 1200px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
 
-      tiles.forEach(tile => {
-        const text = tile.innerText.toLowerCase() + tile.getAttribute('data-keywords');
-        if (text.includes(input)) {
-          tile.style.display = "block";
-          foundAny = true;
-        } else {
-          tile.style.display = "none";
-        }
-      });
+.sim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
 
-      if (!foundAny && input !== "") {
-          tiles.forEach(t => t.style.display = "block");
-          sections.forEach(s => s.style.display = "block");
-      } else {
-          sections.forEach(section => {
-            const visibleCount = section.querySelectorAll('.sim-tile[style="display: block;"]').length;
-            section.style.display = (visibleCount > 0 || input === "") ? "block" : "none";
-          });
-      }
-    }
+.sim-tile {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
 
-    function filterScience(subject) {
-      const sections = document.querySelectorAll('.science-section');
-      const buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(b => b.classList.remove('active'));
-      document.getElementById('btn-' + subject).classList.add('active');
-      sections.forEach(s => s.style.display = (subject === 'all' || s.id.startsWith(subject)) ? 'block' : 'none');
-    }
-  </script>
-</body>
-</html>
+.sim-tile:hover {
+  transform: translateY(-5px);
+}
+
+iframe {
+  width: 100%;
+  height: 280px;
+  border-radius: 15px;
+  border: none;
+  background: #000;
+}
+
+h2 { font-size: 2.2em; color: #3b82f6; margin-bottom: 10px; }
+
+.summary-notes {
+  background: rgba(59, 130, 246, 0.1);
+  padding: 15px;
+  border-radius: 15px;
+  border-left: 5px solid #3b82f6;
+  margin-bottom: 20px;
+}
+
+footer {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(0, 0, 0, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
