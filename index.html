@@ -3,106 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quantum Playground | Science Sim Hub</title>
+  <title>Quantum Playground | Science Explorer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header>
     <h1>Quantum Playground</h1>
-    <p>Comprehensive Science Directory for Kenyan Students</p>
+    <p>Comprehensive Science Directory for Students</p>
   </header>
 
   <div class="peak-search-container">
-    <input type="text" class="search-input" placeholder="Search 60+ topics like 'Ohm's Law', 'DNA', 'Acids'...">
+    <input type="text" class="search-input" id="mainSearch" placeholder="Search topics (e.g. 'Hydrogen', 'Gravity', 'DNA')..." onkeyup="searchSimulations()">
+    
     <div class="filter-group">
-      <button class="filter-btn">All Subjects</button>
-      <button class="filter-btn">Physics</button>
-      <button class="filter-btn">Chemistry</button>
-      <button class="filter-btn">Biology</button>
+      <button class="filter-btn active" id="btn-all" onclick="filterScience('all')">All Subjects</button>
+      <button class="filter-btn" id="btn-physics" onclick="filterScience('physics')">Physics</button>
+      <button class="filter-btn" id="btn-chemistry" onclick="filterScience('chemistry')">Chemistry</button>
+      <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">Biology</button>
     </div>
   </div>
 
-  <main>
-    <section class="subject-card">
-      <h2>🔭 Physics</h2>
-      <p>Exploring the mechanics of the universe, from gravity to electricity.</p>
-      
+  <main id="content-main">
+    <section id="physics-sec" class="subject-card science-section">
+      <div class="section-header">
+        <h2>🔭 Physics: Motion & Energy</h2>
+        <div class="summary-notes">
+          <p><strong>Summary:</strong> Physics is the study of matter, energy, and forces. It governs everything from planetary orbits to the electricity in your home.</p>
+          <p><strong>Key Formulae:</strong> $F = ma$, $V = IR$, $KE = \frac{1}{2}mv^2$.</p>
+        </div>
+      </div>
+
       <div class="sim-grid">
-        <div class="sim-tile">
+        <div class="sim-tile" data-keywords="forces motion push pull friction newton gravity">
           <h4>Forces & Motion</h4>
+          <p class="sim-note">Explore how forces change an object's speed. Includes friction and net force.</p>
           <iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html"></iframe>
         </div>
-        <div class="sim-tile">
+        
+        <div class="sim-tile" data-keywords="projectile motion launch trajectory gravity angle velocity">
           <h4>Projectile Motion</h4>
+          <p class="sim-note">Launch objects and predict their paths based on angle and air resistance.</p>
+          
           <iframe src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html"></iframe>
         </div>
-        <div class="sim-tile">
-          <h4>Energy Skate Park</h4>
-          <iframe src="https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html"></iframe>
-        </div>
-        <div class="sim-tile">
-          <h4>Bending Light</h4>
-          <iframe src="https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html"></iframe>
-        </div>
       </div>
-      
     </section>
 
-    <section class="subject-card">
-      <h2>🧪 Chemistry</h2>
-      <p>Atomic structure, chemical reactions, and the states of matter.</p>
-      
+    <section id="chemistry-sec" class="subject-card science-section">
+      <div class="section-header">
+        <h2>🧪 Chemistry: Atoms & Reactions</h2>
+        <div class="summary-notes">
+          <p><strong>Summary:</strong> Chemistry is the "central science" focusing on how substances change through chemical reactions.</p>
+          <p><strong>Key Formulae:</strong> $PV = nRT$, $pH = -\log[H^+]$, $n = m/M$.</p>
+        </div>
+      </div>
+
       <div class="sim-grid">
-        <div class="sim-tile">
+        <div class="sim-tile" data-keywords="build atom hydrogen proton neutron electron element molecule">
           <h4>Build an Atom</h4>
+          <p class="sim-note">Construct atoms like Hydrogen or Carbon by managing subatomic particles.</p>
+          
           <iframe src="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html"></iframe>
         </div>
-        <div class="sim-tile">
+
+        <div class="sim-tile" data-keywords="states matter solid liquid gas heat phase ice water steam temperature">
           <h4>States of Matter</h4>
+          <p class="sim-note">Observe phase changes as you heat or cool molecules.</p>
+          
           <iframe src="https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html"></iframe>
         </div>
-        <div class="sim-tile">
-          <h4>pH Scale: Basics</h4>
-          <iframe src="https://phet.colorado.edu/sims/html/ph-scale-basics/latest/ph-scale-basics_en.html"></iframe>
-        </div>
-        <div class="sim-tile">
-          <h4>Molarity</h4>
-          <iframe src="https://phet.colorado.edu/sims/html/molarity/latest/molarity_en.html"></iframe>
-        </div>
       </div>
-      
     </section>
 
-    <section class="subject-card">
-      <h2>🧬 Biology</h2>
-      <p>Investigating cell biology, genetic inheritance, and evolution.</p>
-      
-      <div class="sim-grid">
-        <div class="sim-tile">
-          <h4>Natural Selection</h4>
-          <iframe src="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html"></iframe>
-        </div>
-        <div class="sim-tile">
-          <h4>Gene Expression</h4>
-          <iframe src="https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_en.html"></iframe>
-        </div>
-        <div class="sim-tile">
-          <h4>Color Vision</h4>
-          <iframe src="https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_en.html"></iframe>
-        </div>
-        <div class="sim-tile">
-          <h4>Neuron</h4>
-          <iframe src="https://phet.colorado.edu/sims/html/neuron/latest/neuron_en.html"></iframe>
+    <section id="biology-sec" class="subject-card science-section">
+      <div class="section-header">
+        <h2>🧬 Biology: Life & Evolution</h2>
+        <div class="summary-notes">
+          <p><strong>Summary:</strong> Biology is the study of living organisms and their environments.</p>
+          <p><strong>Key Concepts:</strong> Cell Theory, Photosynthesis, Natural Selection.</p>
         </div>
       </div>
-      
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="natural selection evolution rabbits survival genetics fitness traits">
+          <h4>Natural Selection</h4>
+          <p class="sim-note">Watch how populations change over generations based on environmental pressure.</p>
+          <iframe src="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="gene expression dna protein rna cell blueprint heredity">
+          <h4>Gene Expression</h4>
+          <p class="sim-note">See how DNA instructions are turned into functional proteins.</p>
+          
+          <iframe src="https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_en.html"></iframe>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2026 Developed by **Malcolm and Yens** | Quantum Playground Nairobi 🚀</p>
+    <p>© 2026 Developed by <strong>Malcolm and Yens</strong> | Quantum Playground 🚀</p>
   </footer>
 
+  <script>
+    // Exclusive Filter Logic
+    function filterScience(subject) {
+      const sections = document.querySelectorAll('.science-section');
+      const buttons = document.querySelectorAll('.filter-btn');
+      
+      buttons.forEach(btn => btn.classList.remove('active'));
+      document.getElementById('btn-' + subject).classList.add('active');
+
+      sections.forEach(section => {
+        if (subject === 'all') {
+          section.style.display = 'block';
+        } else {
+          section.style.display = section.id.startsWith(subject) ? 'block' : 'none';
+        }
+      });
+    }
+
+    // Live Search Function
+    function searchSimulations() {
+      const input = document.getElementById('mainSearch').value.toLowerCase();
+      const tiles = document.querySelectorAll('.sim-tile');
+      const sections = document.querySelectorAll('.science-section');
+
+      tiles.forEach(tile => {
+        const title = tile.querySelector('h4').innerText.toLowerCase();
+        const note = tile.querySelector('.sim-note').innerText.toLowerCase();
+        const keywords = tile.getAttribute('data-keywords');
+
+        if (title.includes(input) || note.includes(input) || keywords.includes(input)) {
+          tile.style.display = "block";
+        } else {
+          tile.style.display = "none";
+        }
+      });
+
+      // Hide empty sections during search
+      sections.forEach(section => {
+        const visibleTiles = section.querySelectorAll('.sim-tile[style="display: block;"]').length;
+        const totalTiles = section.querySelectorAll('.sim-tile').length;
+        
+        // If searching, only show sections with results. If empty search, show all.
+        if (input === "") {
+          section.style.display = "block";
+          tiles.forEach(t => t.style.display = "block");
+        } else {
+          section.style.display = visibleTiles > 0 ? "block" : "none";
+        }
+      });
+    }
+  </script>
 </body>
 </html>
