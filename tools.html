@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Tools - Quantum Playground</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>Quantum Playground</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="basics.html">Physics Basics</a>
+    <a href="engineering.html">Engineering Challenges</a>
+    <a href="tools.html">Interactive Tools</a>
+    <a href="project.html">My Science Project</a>
+  </nav>
+
+  <main>
+    <h2>Interactive Tools & Simulations</h2>
+    <p>Experiment right here — sliders, drags, and calculations bring physics to life!</p>
+
+    <div class="calculator">
+      <h3>Projectile Range Calculator (No Air Resistance)</h3>
+      <label>Initial speed (m/s): <input type="number" id="v" value="20" step="any"></label><br><br>
+      <label>Launch angle (degrees): <input type="number" id="theta" value="45" step="any"></label><br><br>
+      <button onclick="calcRange()">Calculate Range</button>
+      <p id="rangeResult" style="font-weight:bold; color:#1e40af; min-height:1.5em;"></p>
+    </div>
+
+    <div class="calculator">
+      <h3>Ohm's Law Calculator</h3>
+      <label>Voltage (V): <input type="number" id="volt" value="12" step="any"></label><br><br>
+      <label>Resistance (Ω): <input type="number" id="res" value="100" step="any"></label><br><br>
+      <button onclick="calcOhm()">Calculate Current</button>
+      <p id="ohmResult" style="font-weight:bold; color:#1e40af; min-height:1.5em;"></p>
+    </div>
+
+    <h3>PhET Forces and Motion: Basics</h3>
+    <p>Apply forces, add friction, watch Newton's laws in action with boxes and people.</p>
+    <iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html" allowfullscreen></iframe>
+
+    <h3>PhET Projectile Motion</h3>
+    <p>Launch cannonballs or cars — adjust angle, speed, air resistance, and gravity.</p>
+    <iframe src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html" allowfullscreen></iframe>
+
+    <h3>PhET Energy Skate Park</h3>
+    <p>Build ramps and tracks — see kinetic ↔ potential energy conversion in real time.</p>
+    <iframe src="https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html" allowfullscreen></iframe>
+
+    <h3>PhET Circuit Construction Kit: DC</h3>
+    <p>Build circuits with real-looking components — measure voltage/current.</p>
+    <iframe src="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html" allowfullscreen></iframe>
+
+    <h3>PhET Ohm's Law</h3>
+    <p>Adjust voltage and resistance — watch how current responds instantly.</p>
+    <iframe src="https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_en.html" allowfullscreen></iframe>
+
+    <p>Want more? Browse <a href="https://phet.colorado.edu/en/simulations/category/physics" target="_blank">all PhET physics sims</a> and copy the embed link for your favorites!</p>
+  </main>
+
+  <footer>
+    <p>© 2026 Malcolm from Nairobi | Hosted on GitHub Pages</p>
+  </footer>
+
+  <script>
+    function calcRange() {
+      const v = parseFloat(document.getElementById('v').value) || 0;
+      const theta = parseFloat(document.getElementById('theta').value) || 0;
+      const g = 9.8;
+      const rad = theta * Math.PI / 180;
+      const range = (v ** 2 * Math.sin(2 * rad)) / g;
+      document.getElementById('rangeResult').innerHTML = isNaN(range) || range < 0 ? 'Enter valid numbers' : `Horizontal range: ${range.toFixed(2)} meters`;
+    }
+
+    function calcOhm() {
+      const v = parseFloat(document.getElementById('volt').value) || 0;
+      const r = parseFloat(document.getElementById('res').value) || 0;
+      const i = (r > 0) ? v / r : 0;
+      document.getElementById('ohmResult').innerHTML = `Current: ${i.toFixed(3)} A`;
+    }
+  </script>
+
+</body>
+</html>
