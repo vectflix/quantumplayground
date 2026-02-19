@@ -5,105 +5,1087 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quantum Playground | Final Suite</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header>
-    <h1>Quantum Playground</h1>
-    <p>Comprehensive Science Directory for Students</p>
+  <header class="glass-header">
+    <div class="header-content">
+      <h1 class="logo-text">Quantum Playground</h1>
+      <p class="tagline">The Ultimate Science Directory for Students</p>
+    </div>
   </header>
 
-  <div class="peak-search-container" id="searchBox">
-    <input type="text" class="search-input" id="mainSearch" placeholder="Search sims, notes, or videos..." onkeyup="searchEverything()">
+  <nav class="peak-search-container" id="searchBox">
+    <div class="search-wrapper">
+      <input type="text" class="search-input" id="mainSearch" placeholder="Search sims, notes, or videos..." onkeyup="searchEverything()">
+    </div>
+    
     <div class="filter-group">
       <button class="filter-btn active" id="btn-all" onclick="filterScience('all')">All</button>
       <button class="filter-btn" id="btn-physics" onclick="filterScience('physics')">Physics</button>
       <button class="filter-btn" id="btn-chemistry" onclick="filterScience('chemistry')">Chemistry</button>
       <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">Biology</button>
     </div>
+  </nav>
+
+  <main id="content-main" class="container">
+    ```
+    <section id="physics-sec-1" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 01</span>
+        <h2>🔭 Mechanics & Fundamental Dynamics</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="kinematics velocity acceleration displacement physics">
+          <div class="card-glow"></div>
+          <h3>1. Kinematics</h3>
+          <ul>
+            <li><strong>Displacement:</strong> Vector change in position ($\Delta x$).</li>
+            <li><strong>Velocity:</strong> Rate of change of displacement ($v = \Delta x / \Delta t$).</li>
+            <li><strong>Acceleration:</strong> Rate of change of velocity ($a = \Delta v / \Delta t$).</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/rZ-p-pM8Y_Q" allowfullscreen title="Kinematics Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="newton laws inertia force ma physics">
+          <div class="card-glow"></div>
+          <h3>2. Newton's Laws of Motion</h3>
+          <ul>
+            <li><strong>1st Law:</strong> Inertia - Objects resist changes in motion.</li>
+            <li><strong>2nd Law:</strong> Fundamental law ($F = ma$).</li>
+            <li><strong>3rd Law:</strong> Action & Reaction are equal and opposite.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/kKKM8Y-u7ds" allowfullscreen title="Newton's Laws Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="work energy power kinetic potential physics">
+          <div class="card-glow"></div>
+          <h3>3. Work, Energy & Power</h3>
+          <ul>
+            <li><strong>Work:</strong> Product of force and displacement ($W = Fd \cos \theta$).</li>
+            <li><strong>Energy:</strong> Kinetic ($\frac{1}{2}mv^2$) and Potential ($mgh$).</li>
+            <li><strong>Power:</strong> The rate of doing work ($P = W/t$).</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/2WCT0W8Ljdg" allowfullscreen title="Energy Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="projectile launch angle trajectory physics">
+          <div class="sim-info">
+            <h4>4. Projectile Motion</h4>
+            <p>Analyze the parabolic flight of objects under gravity.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="friction force net force motion physics">
+          <div class="sim-info">
+            <h4>5. Forces & Motion</h4>
+            <p>Adjust friction and mass to see Newton's 2nd Law in action.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="gravity orbits space mass distance physics">
+          <div class="sim-info">
+            <h4>6. Gravity & Orbits</h4>
+            <p>Explore the gravitational dance between celestial bodies.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="physics-sec-2" class="subject-card science-section">
+  <h2 class="section-title">🌊 Physics Part 2: Waves & Thermodynamics</h2>
+
+  <div class="notes-grid">
+    <div class="note-card" data-keywords="waves frequency amplitude wavelength physics">
+      <h3>7. Wave Properties</h3>
+      <ul>
+        <li><strong>Transverse:</strong> Oscillation perpendicular to travel (Light).</li>
+        <li><strong>Longitudinal:</strong> Oscillation parallel to travel (Sound).</li>
+        <li><strong>Equation:</strong> $ v = f\lambda $ (Velocity = frequency × wavelength).</li>
+      </ul>
+      
+
+[Image of a transverse wave vs longitudinal wave]
+
+      <iframe class="yt-video" src="https://www.youtube.com/embed/RVyHkV3wIqQ" allowfullscreen></iframe>
+    </div>
+
+    <div class="note-card" data-keywords="heat temperature entropy laws thermo physics">
+      <h3>8. Laws of Thermodynamics</h3>
+      <ul>
+        <li><strong>1st Law:</strong> Energy conservation ($\Delta U = Q - W$).</li>
+        <li><strong>2nd Law:</strong> Entropy of an isolated system always increases.</li>
+        <li><strong>0th Law:</strong> Thermal equilibrium concept.</li>
+      </ul>
+      <iframe class="yt-video" src="https://www.youtube.com/embed/4i1_Lz02re4" allowfullscreen></iframe>
+    </div>
+
+    <div class="note-card" data-keywords="light optics mirror lens snell physics">
+      <h3>9. Geometric Optics</h3>
+      <ul>
+        <li><strong>Reflection:</strong> Angle of incidence = Angle of reflection.</li>
+        <li><strong>Refraction:</strong> Bending of light (Snell's Law: $n_1 \sin\theta_1 = n_2 \sin\theta_2$).</li>
+      </ul>
+      <iframe class="yt-video" src="https://www.youtube.com/embed/95V-QJYZ2Dw" allowfullscreen></iframe>
+    </div>
   </div>
 
-  <main id="content-main">
-    <section id="physics-sec" class="subject-card science-section">
-      <h2>🔭 Physics: Motion & Energy</h2>
-      
+  <div class="sim-grid">
+    <div class="sim-tile" data-keywords="interference double slit diffraction waves physics">
+      <h4>10. Wave Interference</h4>
+      <p>Observe constructive and destructive interference patterns.</p>
+      <iframe src="https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_en.html"></iframe>
+    </div>
+
+    <div class="sim-tile" data-keywords="refraction prism light glass physics">
+      <h4>11. Bending Light</h4>
+      <p>Explore how light travels through different mediums and prisms.</p>
+      <iframe src="https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html"></iframe>
+    </div>
+
+    <div class="sim-tile" data-keywords="spring hooke law oscillator harmonic physics">
+      <h4>12. Hooke's Law & SHM</h4>
+      <p>Test the relationship between force, mass, and spring constants.</p>
+      <iframe src="https://phet.colorado.edu/sims/html/masses-and-springs/latest/masses-and-springs_en.html"></iframe>
+    </div>
+  </div>
+</section>
+<section id="physics-sec-3" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 03</span>
+        <h2>⚡ Electricity & Magnetic Fields</h2>
+      </div>
+
       <div class="notes-grid">
-        <div class="note-card" data-keywords="newton laws motion force gravity physics">
-          <h3>Study Notes: Newton's Laws</h3>
+        <div class="note-card" data-keywords="electrostatics charge coulomb protons electrons physics">
+          <div class="card-glow"></div>
+          <h3>13. Electrostatics</h3>
           <ul>
-            <li><strong>1st Law:</strong> Objects resist changes in motion (Inertia).</li>
-            <li><strong>2nd Law:</strong> Force = mass × acceleration ($F=ma$).</li>
-            <li><strong>3rd Law:</strong> Action/Reaction are equal and opposite.</li>
+            <li><strong>Charge:</strong> Measured in Coulombs ($C$).</li>
+            <li><strong>Coulomb's Law:</strong> Force between charges ($F = k \frac{q_1q_2}{r^2}$).</li>
+            <li><strong>Insulators vs Conductors:</strong> Ability for charge to flow.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/TFlRWtmB0No" allowfullscreen title="Electrostatics Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="circuits ohm law voltage current resistance physics">
+          <div class="card-glow"></div>
+          <h3>14. Ohm's Law & Circuits</h3>
+          <ul>
+            <li><strong>Ohm's Law:</strong> $V = IR$ (Voltage = Current × Resistance).</li>
+            <li><strong>Series:</strong> Current is constant; voltages add up.</li>
+            <li><strong>Parallel:</strong> Voltage is constant; currents add up.</li>
           </ul>
           
-          <iframe class="yt-video" src="https://www.youtube.com/embed/kKKM8Y-u7ds" allowfullscreen></iframe>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/Xn0vV_VIny8" allowfullscreen title="Circuits Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="magnetism induction faraday flux physics">
+          <div class="card-glow"></div>
+          <h3>15. Electromagnetism</h3>
+          <ul>
+            <li><strong>Magnetic Fields:</strong> Created by moving charges (current).</li>
+            <li><strong>Faraday's Law:</strong> Changing magnetic fields induce current.</li>
+            <li><strong>Right-Hand Rule:</strong> Determining force and field direction.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/hqZtc8W9Ym8" allowfullscreen title="Electromagnetism Video"></iframe>
         </div>
       </div>
 
       <div class="sim-grid">
-        <div class="sim-tile" data-keywords="force motion friction push pull"><h4>Forces & Motion</h4><iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="gravity orbit space sun earth"><h4>Gravity & Orbits</h4><iframe src="https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="projectile launch trajectory angle"><h4>Projectile Motion</h4><iframe src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="circuit energy battery light bulb"><h4>Circuit Basics</h4><iframe src="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="waves sound frequency water"><h4>Waves Intro</h4><iframe src="https://phet.colorado.edu/sims/html/waves-intro/latest/waves-intro_en.html"></iframe></div>
+        <div class="sim-tile" data-keywords="circuit battery bulb resistor dc physics">
+          <div class="sim-info">
+            <h4>16. Circuit Lab (DC)</h4>
+            <p>Build virtual circuits with batteries, bulbs, and switches.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html"></iframe>
         </div>
-    </section>
 
-    <section id="chemistry-sec" class="subject-card science-section">
-      <h2>🧪 Chemistry: Atoms & Reactions</h2>
+        <div class="sim-tile" data-keywords="electric field potential voltage charge physics">
+          <div class="sim-info">
+            <h4>17. Charges & Fields</h4>
+            <p>Visualize the invisible electric field lines around point charges.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/charges-and-fields/latest/charges-and-fields_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="induction magnet coil voltage physics">
+          <div class="sim-info">
+            <h4>18. Faraday's Law</h4>
+            <p>Move a magnet through a coil to light up a bulb via induction.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/faradays-law/latest/faradays-law_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="physics-sec-4" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 04</span>
+        <h2>⚛️ Modern & Nuclear Physics</h2>
+      </div>
 
       <div class="notes-grid">
-        <div class="note-card" data-keywords="periodic table elements atoms chemistry shells">
-          <h3>Study Notes: The Periodic Table</h3>
+        <div class="note-card" data-keywords="atom bohr rutherford dalton quantum physics">
+          <div class="card-glow"></div>
+          <h3>19. Atomic Structure</h3>
           <ul>
-            <li><strong>Groups:</strong> Vertical columns; same valence electrons.</li>
-            <li><strong>Periods:</strong> Horizontal rows; same shells.</li>
-            <li><strong>Atomic Number:</strong> Number of protons.</li>
+            <li><strong>Rutherford:</strong> Discovered the dense, positive nucleus.</li>
+            <li><strong>Bohr Model:</strong> Electrons exist in discrete energy levels.</li>
+            <li><strong>Quantum Model:</strong> Electrons as probability clouds (orbitals).</li>
           </ul>
           
-          <iframe class="yt-video" src="https://www.youtube.com/embed/0RRVV4Diomg" allowfullscreen></iframe>
+
+[Image of the Bohr model of the atom vs the Quantum Mechanical model]
+
+          <iframe class="yt-video" src="https://www.youtube.com/embed/NSAgLvKOPLQ" allowfullscreen title="Atomic Models Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="nuclear decay alpha beta gamma half-life physics">
+          <div class="card-glow"></div>
+          <h3>20. Nuclear Decay</h3>
+          <ul>
+            <li><strong>Alpha ($\alpha$):</strong> Emission of a Helium nucleus.</li>
+            <li><strong>Beta ($\beta$):</strong> Transformation of a neutron to a proton.</li>
+            <li><strong>Half-Life:</strong> Time required for half of a sample to decay.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/fES21EHP7Ww" allowfullscreen title="Radioactivity Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="einstein relativity time dilation light photon physics">
+          <div class="card-glow"></div>
+          <h3>21. Special Relativity</h3>
+          <ul>
+            <li><strong>Time Dilation:</strong> Time slows down at high speeds.</li>
+            <li><strong>Mass-Energy:</strong> $E = mc^2$.</li>
+            <li><strong>Photoelectric Effect:</strong> Light behaving as particles (photons).</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/ev9zrt__lec" allowfullscreen title="Relativity Video"></iframe>
         </div>
       </div>
 
       <div class="sim-grid">
-        <div class="sim-tile" data-keywords="atom proton neutron build hydrogen chemistry"><h4>Build an Atom</h4><iframe src="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="acid base pH scale titration chemistry"><h4>pH Scale</h4><iframe src="https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="solid liquid gas phase heat chemistry"><h4>States of Matter</h4><iframe src="https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="react balance equation chemical chemistry"><h4>Balancing Equations</h4><iframe src="https://phet.colorado.edu/sims/html/balancing-chemical-equations/latest/balancing-chemical-equations_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="molarity concentration dissolve solute chemistry"><h4>Molarity</h4><iframe src="https://phet.colorado.edu/sims/html/molarity/latest/molarity_en.html"></iframe></div>
+        <div class="sim-tile" data-keywords="nucleus gold foil alpha particles physics">
+          <div class="sim-info">
+            <h4>22. Rutherford Scattering</h4>
+            <p>Shoot alpha particles at atoms to see how the nucleus was discovered.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html"></iframe>
         </div>
-    </section>
 
-    <section id="biology-sec" class="subject-card science-section">
-      <h2>🧬 Biology: Life Sciences</h2>
+        <div class="sim-tile" data-keywords="isotopes protons neutrons stability physics">
+          <div class="sim-info">
+            <h4>23. Build a Nucleus</h4>
+            <p>Add protons and neutrons to create stable isotopes and observe decay.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/build-a-nucleus/latest/build-a-nucleus_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="photon electron light metal physics">
+          <div class="sim-info">
+            <h4>24. Photoelectric Effect</h4>
+            <p>Experiment with light intensity and frequency to eject electrons.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/photoelectric-effect/latest/photoelectric-effect_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="physics-sec-5" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 05</span>
+        <h2>🌌 Fluids & The Cosmos</h2>
+      </div>
 
       <div class="notes-grid">
-        <div class="note-card" data-keywords="mitosis cell division dna biology cycle">
-          <h3>Study Notes: Mitosis</h3>
+        <div class="note-card" data-keywords="buoyancy archimedes pressure bernoulli fluids physics">
+          <div class="card-glow"></div>
+          <h3>25. Fluid Mechanics</h3>
           <ul>
-            <li><strong>Prophase:</strong> DNA condenses.</li>
-            <li><strong>Metaphase:</strong> Alignment in center.</li>
-            <li><strong>Anaphase:</strong> Chromatids pull apart.</li>
-            <li><strong>Telophase:</strong> Two nuclei form.</li>
+            <li><strong>Archimedes' Principle:</strong> Buoyant force equals weight of displaced fluid.</li>
+            <li><strong>Bernoulli’s Principle:</strong> Fast moving air creates low pressure.</li>
+            <li><strong>Pressure:</strong> $P = F/A$ (Force divided by Area).</li>
           </ul>
-          [Image showing the stages of mitosis: Prophase, Metaphase, Anaphase, and Telophase]
-          <iframe class="yt-video" src="https://www.youtube.com/embed/f-ldPgEfAHI" allowfullscreen></iframe>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/nST30m3YmI0" allowfullscreen title="Fluids Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="boyle charles ideal gas kelvin physics">
+          <div class="card-glow"></div>
+          <h3>26. The Gas Laws</h3>
+          <ul>
+            <li><strong>Boyle's Law:</strong> Pressure is inversely proportional to Volume.</li>
+            <li><strong>Ideal Gas Law:</strong> $PV = nRT$.</li>
+            <li><strong>Absolute Zero:</strong> $0\text{ K}$ (where all molecular motion stops).</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/TQ_W_f2z0_I" allowfullscreen title="Gas Laws Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="stars black holes galaxy big bang physics">
+          <div class="card-glow"></div>
+          <h3>27. Cosmology & Stars</h3>
+          <ul>
+            <li><strong>Stellar Life Cycle:</strong> From Nebula to White Dwarf or Supernova.</li>
+            <li><strong>Black Holes:</strong> Regions of spacetime where gravity prevents light escape.</li>
+            <li><strong>Expansion:</strong> Hubble’s Law and the Big Bang Theory.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/9EnBBIx6XkM" allowfullscreen title="Astrophysics Video"></iframe>
         </div>
       </div>
 
       <div class="sim-grid">
-        <div class="sim-tile" data-keywords="evolution selection nature rabbit biology"><h4>Natural Selection</h4><iframe src="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="dna gene protein rna helix biology"><h4>Gene Expression</h4><iframe src="https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="neuron brain nerve signal biology"><h4>Neuron</h4><iframe src="https://phet.colorado.edu/sims/html/neuron/latest/neuron_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="cell membrane channel ion biology"><h4>Membrane Channels</h4><iframe src="https://phet.colorado.edu/sims/html/membrane-channels/latest/membrane-channels_en.html"></iframe></div>
-        <div class="sim-tile" data-keywords="eye color vision light biology"><h4>Color Vision</h4><iframe src="https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_en.html"></iframe></div>
+        <div class="sim-tile" data-keywords="density float sink water physics">
+          <div class="sim-info">
+            <h4>28. Buoyancy</h4>
+            <p>Drop objects into fluids to see why they float or sink based on density.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/buoyancy/latest/buoyancy_en.html"></iframe>
         </div>
-    </section>
-  </main>
 
-  <footer>
-    <p>© 2026 Developed by <strong>Malcolm and Yens</strong> | Quantum Playground 🚀</p>
-    <p><small>Cookies & Privacy | My Account | Global Ranking Enabled</small></p>
+        <div class="sim-tile" data-keywords="temperature pressure pump volume physics">
+          <div class="sim-info">
+            <h4>29. Gas Properties</h4>
+            <p>Pump gas molecules into a box and observe effects of temperature and pressure.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="planets orbit solar system gravity physics">
+          <div class="sim-info">
+            <h4>30. My Solar System</h4>
+            <p>Create your own planetary systems and watch orbital mechanics in real-time.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+  </main> ```
+<section id="chemistry-sec-1" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 01</span>
+        <h2>🧪 Atoms, Molecules & States of Matter</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="atom proton neutron electron nucleus chemistry">
+          <div class="card-glow"></div>
+          <h3>1. Atomic Structure</h3>
+          <ul>
+            <li><strong>Protons:</strong> Positive charge; determines identity.</li>
+            <li><strong>Neutrons:</strong> Neutral charge; determines isotope.</li>
+            <li><strong>Electrons:</strong> Negative charge; determines reactivity.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/O5iaw5WNuB0" allowfullscreen title="Atomic Structure Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="solid liquid gas plasma phase chemistry">
+          <div class="card-glow"></div>
+          <h3>2. States of Matter</h3>
+          <ul>
+            <li><strong>Solid:</strong> Fixed shape and volume; low energy.</li>
+            <li><strong>Liquid:</strong> Fixed volume; takes shape of container.</li>
+            <li><strong>Gas:</strong> No fixed shape or volume; high energy.</li>
+          </ul>
+          
+
+[Image of the molecular arrangement in solids, liquids, and gases]
+
+          <iframe class="yt-video" src="https://www.youtube.com/embed/HAPc6JH8OTk" allowfullscreen title="States of Matter Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="periodic table groups periods elements chemistry">
+          <div class="card-glow"></div>
+          <h3>3. The Periodic Table</h3>
+          <ul>
+            <li><strong>Groups:</strong> Columns with similar chemical properties.</li>
+            <li><strong>Periods:</strong> Rows representing electron shells.</li>
+            <li><strong>Trends:</strong> Electronegativity and Ionization Energy.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/0RRVV4Diomg" allowfullscreen title="Periodic Table Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="atom protons neutrons electrons chemistry">
+          <div class="sim-info">
+            <h4>4. Build an Atom</h4>
+            <p>Construct atoms and see how the element changes with each particle.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="solid liquid gas phase heat chemistry">
+          <div class="sim-info">
+            <h4>5. States of Matter</h4>
+            <p>Heat, cool, and compress atoms and molecules to see transitions.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="isotopes mass abundance chemistry">
+          <div class="sim-info">
+            <h4>6. Isotopes</h4>
+            <p>Explore different isotopes and how they affect average atomic mass.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="chemistry-sec-2" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 02</span>
+        <h2>🔗 Chemical Bonding & Shapes</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="ionic covalent metallic bonding electrons chemistry">
+          <div class="card-glow"></div>
+          <h3>7. Types of Chemical Bonds</h3>
+          <ul>
+            <li><strong>Ionic:</strong> Complete transfer of electrons (Metal + Non-metal).</li>
+            <li><strong>Covalent:</strong> Sharing of electron pairs (Non-metal + Non-metal).</li>
+            <li><strong>Metallic:</strong> "Sea of electrons" surrounding positive ions.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/7DjsD7Hcd9U" allowfullscreen title="Chemical Bonding Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="vsepr geometry molecular shape lone pairs chemistry">
+          <div class="card-glow"></div>
+          <h3>8. Molecular Geometry (VSEPR)</h3>
+          <ul>
+            <li><strong>Linear:</strong> 180° bond angle (e.g., $CO_2$).</li>
+            <li><strong>Trigonal Planar:</strong> 120° bond angle (e.g., $BF_3$).</li>
+            <li><strong>Tetrahedral:</strong> 109.5° bond angle (e.g., $CH_4$).</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/nxebQZUVvTg" allowfullscreen title="VSEPR Theory Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="polarity electronegativity dipole water chemistry">
+          <div class="card-glow"></div>
+          <h3>9. Polarity & Intermolecular Forces</h3>
+          <ul>
+            <li><strong>Polar Bonds:</strong> Unequal sharing of electrons.</li>
+            <li><strong>Dipole-Dipole:</strong> Attraction between polar molecules.</li>
+            <li><strong>Hydrogen Bonding:</strong> Strong attraction involving H and N, O, or F.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/uYtwU0uRK7o" allowfullscreen title="Polarity Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="geometry vsepr bonding atoms chemistry">
+          <div class="sim-info">
+            <h4>10. Molecule Shapes</h4>
+            <p>Build molecules in 3D and see how electron repulsion dictates their shape.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="dipole electronegativity partial charge chemistry">
+          <div class="sim-info">
+            <h4>11. Molecule Polarity</h4>
+            <p>Change electronegativities to see how it affects the molecular dipole.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/molecule-polarity/latest/molecule-polarity_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="formula structures covalent chemistry">
+          <div class="sim-info">
+            <h4>12. Build a Molecule</h4>
+            <p>Drag atoms to create simple and complex molecules from formulas.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/build-a-molecule/latest/build-a-molecule_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="chemistry-sec-3" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 03</span>
+        <h2>⚖️ Chemical Reactions & Stoichiometry</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="synthesis decomposition combustion replacement chemistry">
+          <div class="card-glow"></div>
+          <h3>13. Types of Reactions</h3>
+          <ul>
+            <li><strong>Synthesis:</strong> Two substances combine ($A + B \rightarrow AB$).</li>
+            <li><strong>Decomposition:</strong> One substance breaks down ($AB \rightarrow A + B$).</li>
+            <li><strong>Combustion:</strong> Reaction with $O_2$ producing $CO_2$ and $H_2$.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/g-biRwAVTV8" allowfullscreen title="Reaction Types Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="avogadro mole molar mass stoichiometry chemistry">
+          <div class="card-glow"></div>
+          <h3>14. The Mole & Avogadro</h3>
+          <ul>
+            <li><strong>The Mole:</strong> $6.022 \times 10^{23}$ particles (Avogadro's Number).</li>
+            <li><strong>Molar Mass:</strong> Mass in grams of one mole of a substance.</li>
+            <li><strong>Conversion:</strong> Moles to grams using $n = m / M$.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/TEl4jeETVmg" allowfullscreen title="The Mole Concept Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="yield limiting excess reactant chemistry">
+          <div class="card-glow"></div>
+          <h3>15. Yield & Limiting Reactants</h3>
+          <ul>
+            <li><strong>Limiting Reactant:</strong> The substance used up first in a reaction.</li>
+            <li><strong>Theoretical Yield:</strong> Maximum product possible from calculations.</li>
+            <li><strong>Percent Yield:</strong> $(\text{Actual} / \text{Theoretical}) \times 100$.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/nZOVR8EMwRU" allowfullscreen title="Limiting Reactant Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="balance coefficients reactants products chemistry">
+          <div class="sim-info">
+            <h4>16. Balancing Equations</h4>
+            <p>Master the art of conservation of mass by balancing atoms on both sides.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/balancing-chemical-equations/latest/balancing-chemical-equations_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="limiting excess stoichiometry chemistry">
+          <div class="sim-info">
+            <h4>17. Reactants & Leftovers</h4>
+            <p>See how limiting reactants work by making sandwiches and molecules.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="concentration solution solute solvent chemistry">
+          <div class="sim-info">
+            <h4>18. Molarity</h4>
+            <p>Calculate concentration by adjusting solute amount and solution volume.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/molarity/latest/molarity_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="chemistry-sec-4" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 04</span>
+        <h2>🧪 Solutions, Acids & Bases</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="acid base proton donor acceptor ph chemistry">
+          <div class="card-glow"></div>
+          <h3>19. Intro to Acids & Bases</h3>
+          <ul>
+            <li><strong>Acids:</strong> Proton ($H^+$) donors; sour taste; $pH < 7$.</li>
+            <li><strong>Bases:</strong> Proton ($H^+$) acceptors; bitter taste; $pH > 7$.</li>
+            <li><strong>Neutralization:</strong> Acid + Base $\rightarrow$ Salt + Water.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/ANi709MYnWg" allowfullscreen title="Acids and Bases Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="solute solvent saturated supersaturated chemistry">
+          <div class="card-glow"></div>
+          <h3>20. Solubility Science</h3>
+          <ul>
+            <li><strong>Solute:</strong> The substance being dissolved.</li>
+            <li><strong>Solvent:</strong> The medium doing the dissolving (e.g., Water).</li>
+            <li><strong>Saturation:</strong> When no more solute can dissolve at a given temp.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/9h2f1Bjr974" allowfullscreen title="Solubility Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="titration indicator equivalence point chemistry">
+          <div class="card-glow"></div>
+          <h3>21. Titrations</h3>
+          <ul>
+            <li><strong>Titration:</strong> Method to determine unknown concentration.</li>
+            <li><strong>Equivalence Point:</strong> Moles of acid equal moles of base.</li>
+            <li><strong>Indicators:</strong> Chemicals like Phenolphthalein that change color.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/sFpFCPTDv2w" allowfullscreen title="Titration Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="ph scale acid base concentration chemistry">
+          <div class="sim-info">
+            <h4>22. pH Scale Lab</h4>
+            <p>Test the pH of coffee, spit, and soap to see how H+ ions fluctuate.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="dissolve saturate solute solvent chemistry">
+          <div class="sim-info">
+            <h4>23. Concentration</h4>
+            <p>Add solute to water and watch the color change as it becomes saturated.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/concentration/latest/concentration_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="strong weak acid base dissociation chemistry">
+          <div class="sim-info">
+            <h4>24. Acid-Base Solutions</h4>
+            <p>See how strong and weak acids differ at the molecular level.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/acid-base-solutions/latest/acid-base-solutions_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="chemistry-sec-5" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 05</span>
+        <h2>🔥 Energy, Kinetics & Equilibrium</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="enthalpy heat reaction exo endo chemistry">
+          <div class="card-glow"></div>
+          <h3>25. Thermochemistry</h3>
+          <ul>
+            <li><strong>Exothermic:</strong> Heat is released to surroundings ($\Delta H < 0$).</li>
+            <li><strong>Endothermic:</strong> Heat is absorbed from surroundings ($\Delta H > 0$).</li>
+            <li><strong>Enthalpy:</strong> Total heat content of a system.</li>
+          </ul>
+          
+
+[Image of energy profile diagrams for exothermic and endothermic reactions]
+
+          <iframe class="yt-video" src="https://www.youtube.com/embed/8m_K84nGaO4" allowfullscreen title="Thermochemistry Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="kinetics catalyst activation energy chemistry">
+          <div class="card-glow"></div>
+          <h3>26. Chemical Kinetics</h3>
+          <ul>
+            <li><strong>Collision Theory:</strong> Molecules must collide with enough energy.</li>
+            <li><strong>Activation Energy ($E_a$):</strong> Minimum energy to start a reaction.</li>
+            <li><strong>Catalysts:</strong> Speed up reactions by lowering $E_a$.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/7qOFtL3VEBc" allowfullscreen title="Kinetics Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="le chatelier reversible constant equilibrium chemistry">
+          <div class="card-glow"></div>
+          <h3>27. Chemical Equilibrium</h3>
+          <ul>
+            <li><strong>Reversible Reactions:</strong> Occur in both directions.</li>
+            <li><strong>Dynamic Equilibrium:</strong> Forward and reverse rates are equal.</li>
+            <li><strong>Le Chatelier's Principle:</strong> Systems shift to oppose stress.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/g5wNg_dKsYY" allowfullscreen title="Equilibrium Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="thermal energy heat transfer chemistry">
+          <div class="sim-info">
+            <h4>28. Energy Forms</h4>
+            <p>Explore how heating and cooling iron, brick, and water changes energy.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="activation energy temperature molecules chemistry">
+          <div class="sim-info">
+            <h4>29. Reactions & Rates</h4>
+            <p>Observe how temperature and concentration affect reaction frequency.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/reactions-and-rates/latest/reactions-and-rates_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="equilibrium dynamic shift chemistry">
+          <div class="sim-info">
+            <h4>30. Reversible Reactions</h4>
+            <p>Watch a system reach equilibrium and see how it responds to changes.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/reversible-reactions/latest/reversible-reactions_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="biology-sec-1" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 01</span>
+        <h2>🧬 Cell Biology & Life Foundations</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="cell nucleus bacteria organelles biology">
+          <div class="card-glow"></div>
+          <h3>1. Cell Types</h3>
+          <ul>
+            <li><strong>Prokaryotes:</strong> No nucleus; simple structure (e.g., Bacteria).</li>
+            <li><strong>Eukaryotes:</strong> Contain a nucleus and organelles (e.g., Plant/Animal).</li>
+            <li><strong>Organelles:</strong> Specialized "mini-organs" like Mitochondria and Ribosomes.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/Pxujitlv8wc" allowfullscreen title="Cell Types Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="osmosis diffusion active passive transport biology">
+          <div class="card-glow"></div>
+          <h3>2. Membrane Transport</h3>
+          <ul>
+            <li><strong>Diffusion:</strong> Movement from high to low concentration.</li>
+            <li><strong>Osmosis:</strong> Diffusion of water across a membrane.</li>
+            <li><strong>Active Transport:</strong> Requires energy ($ATP$) to move against a gradient.</li>
+          </ul>
+          
+
+[Image of the fluid mosaic model of the cell membrane]
+
+          <iframe class="yt-video" src="https://www.youtube.com/embed/Ptmlvtei8hw" allowfullscreen title="Cell Transport Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="chloroplast glucose light reaction calvin biology">
+          <div class="card-glow"></div>
+          <h3>3. Photosynthesis</h3>
+          <ul>
+            <li><strong>Location:</strong> Occurs in the Chloroplasts of plant cells.</li>
+            <li><strong>Equation:</strong> $6CO_2 + 6H_2O + \text{light} \rightarrow C_6H_{12}O_6 + 6O_2$.</li>
+            <li><strong>Purpose:</strong> Converting light energy into chemical energy (Glucose).</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/SnotL6nre2A" allowfullscreen title="Photosynthesis Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="diffusion concentration ion biology">
+          <div class="sim-info">
+            <h4>4. Membrane Channels</h4>
+            <p>Observe how different concentrations of particles move through a membrane.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/membrane-channels/latest/membrane-channels_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="gradient passive active biology">
+          <div class="sim-info">
+            <h4>5. Diffusion Lab</h4>
+            <p>Simulate how temperature and mass affect the speed of molecular diffusion.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="biomolecules carbohydrates lipids proteins biology">
+          <div class="sim-info">
+            <h4>6. Biological Molecules</h4>
+            <p>Explore the building blocks of life: sugars, fats, and proteins.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/build-a-molecule/latest/build-a-molecule_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="biology-sec-2" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 02</span>
+        <h2>🧬 Genetics & The Code of Life</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="dna helix nucleotides replication biology">
+          <div class="card-glow"></div>
+          <h3>7. DNA Structure</h3>
+          <ul>
+            <li><strong>Double Helix:</strong> Discovered by Watson, Crick, and Franklin.</li>
+            <li><strong>Nucleotides:</strong> Adenine-Thymine (A-T) and Cytosine-Guanine (C-G).</li>
+            <li><strong>Replication:</strong> Semi-conservative process to copy genetic info.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/8kK2zwjRV0M" allowfullscreen title="DNA Structure Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="mitosis meiosis cell division gametes biology">
+          <div class="card-glow"></div>
+          <h3>8. Cell Division</h3>
+          <ul>
+            <li><strong>Mitosis:</strong> One division, two identical diploid daughter cells.</li>
+            <li><strong>Meiosis:</strong> Two divisions, four unique haploid gametes.</li>
+            <li><strong>Purpose:</strong> Growth/Repair (Mitosis) vs. Reproduction (Meiosis).</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/f-ldPgEfAHI" allowfullscreen title="Cell Division Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="mendel punnett square alleles dominant recessive biology">
+          <div class="card-glow"></div>
+          <h3>9. Patterns of Inheritance</h3>
+          <ul>
+            <li><strong>Alleles:</strong> Different versions of a gene (Dominant vs. Recessive).</li>
+            <li><strong>Genotype:</strong> The genetic makeup (e.g., $Bb$).</li>
+            <li><strong>Phenotype:</strong> The physical expression (e.g., Brown eyes).</li>
+          </ul>
+          
+
+[Image of a Punnett square showing a monohybrid cross]
+
+          <iframe class="yt-video" src="https://www.youtube.com/embed/Mehz7tCxjSE" allowfullscreen title="Genetics Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="transcription translation protein rna biology">
+          <div class="sim-info">
+            <h4>10. Gene Expression</h4>
+            <p>See how DNA is transcribed into RNA and translated into proteins.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="lac operon regulation bacteria biology">
+          <div class="sim-info">
+            <h4>11. The Lac Operon</h4>
+            <p>Explore how bacteria turn genes on and off based on their environment.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/gene-machine-the-lac-operon/latest/gene-machine-the-lac-operon_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="eye perception light signal biology">
+          <div class="sim-info">
+            <h4>12. Color Vision</h4>
+            <p>Investigate how the brain interprets signals from photoreceptors in the eye.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="biology-sec-3" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 03</span>
+        <h2>🌍 Evolution & Ecosystems</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="darwin adaptation survival evolution biology">
+          <div class="card-glow"></div>
+          <h3>13. Theory of Evolution</h3>
+          <ul>
+            <li><strong>Variation:</strong> Individuals in a population have different traits.</li>
+            <li><strong>Selection:</strong> Those with favorable traits survive and reproduce.</li>
+            <li><strong>Adaptation:</strong> Over generations, traits that enhance survival become common.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/0SCjhI86grU" allowfullscreen title="Evolution Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="fossils homologous vestigial embryology biology">
+          <div class="card-glow"></div>
+          <h3>14. Evidence of Common Ancestry</h3>
+          <ul>
+            <li><strong>Homologous Structures:</strong> Similar anatomy in different species (e.g., whale fin and human arm).</li>
+            <li><strong>Fossil Record:</strong> Chronological collection of life's remains in rock layers.</li>
+            <li><strong>DNA Sequencing:</strong> Comparing genetic codes to determine relatedness.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/lIEoO5KdPvg" allowfullscreen title="Evolution Evidence Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="food web producer consumer trophic biology">
+          <div class="card-glow"></div>
+          <h3>15. Ecosystem Dynamics</h3>
+          <ul>
+            <li><strong>Producers:</strong> Organisms that make their own food (Autotrophs).</li>
+            <li><strong>Consumers:</strong> Organisms that eat others (Heterotrophs).</li>
+            <li><strong>10% Rule:</strong> Only about 10% of energy is passed to the next trophic level.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/GNjdp8Vatkc" allowfullscreen title="Ecology Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="rabbits mutation environment biology">
+          <div class="sim-info">
+            <h4>16. Natural Selection</h4>
+            <p>Control the environment and mutations of a rabbit population to see who survives.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="population carrying capacity resources biology">
+          <div class="sim-info">
+            <h4>17. Population Dynamics</h4>
+            <p>Explore how predation and food availability affect population growth curves.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="climate carbon cycle atmosphere biology">
+          <div class="sim-info">
+            <h4>18. The Greenhouse Effect</h4>
+            <p>Visualize how greenhouse gases interact with photons to change Earth's temperature.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/greenhouse-effect/latest/greenhouse-effect_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="biology-sec-4" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 04</span>
+        <h2>🫀 Anatomy & Human Systems</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="neuron brain synapse signal biology">
+          <div class="card-glow"></div>
+          <h3>19. The Nervous System</h3>
+          <ul>
+            <li><strong>Neurons:</strong> Cells that transmit electrical impulses.</li>
+            <li><strong>Central Nervous System (CNS):</strong> The brain and spinal cord.</li>
+            <li><strong>Synapse:</strong> The gap where neurotransmitters pass signals between neurons.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/H0K2dvB-7WY" allowfullscreen title="Nervous System Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="heart lungs blood oxygen hemoglobin biology">
+          <div class="card-glow"></div>
+          <h3>20. Gas Exchange & Transport</h3>
+          <ul>
+            <li><strong>Hemoglobin:</strong> Protein in red blood cells that carries oxygen.</li>
+            <li><strong>Alveoli:</strong> Tiny air sacs in lungs where gas exchange occurs.</li>
+            <li><strong>Arteries vs. Veins:</strong> Arteries carry blood away from the heart; veins return it.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/f9ONV69J_dg" allowfullscreen title="Circulatory System Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="antibodies white blood cells virus bacteria biology">
+          <div class="card-glow"></div>
+          <h3>21. Immune Response</h3>
+          <ul>
+            <li><strong>Innate Immunity:</strong> Immediate, non-specific defenses (skin, mucus).</li>
+            <li><strong>Adaptive Immunity:</strong> Targeted response using B-cells and T-cells.</li>
+            <li><strong>Antibodies:</strong> Proteins that identify and neutralize pathogens.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/GIJK3dwCVCw" allowfullscreen title="Immune System Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="action potential signal nerve biology">
+          <div class="sim-info">
+            <h4>22. Neuron Lab</h4>
+            <p>Stimulate a neuron and watch how the action potential travels down the axon.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/neuron/latest/neuron_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="molecular biology force dna biology">
+          <div class="sim-info">
+            <h4>23. Stretching DNA</h4>
+            <p>Explore the physical properties of DNA by applying force to the double helix.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/stretching-dna/latest/stretching-dna_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="metabolism calories health body biology">
+          <div class="sim-info">
+            <h4>24. Eating & Exercise</h4>
+            <p>Balance calorie intake and physical activity to see how it affects body mass.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/eating-and-exercise/latest/eating-and-exercise_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="biology-sec-5" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 05</span>
+        <h2>🌿 Plants & Global Biodiversity</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="xylem phloem roots leaves vascular biology">
+          <div class="card-glow"></div>
+          <h3>25. Plant Anatomy</h3>
+          <ul>
+            <li><strong>Xylem:</strong> Transports water and minerals from roots to leaves.</li>
+            <li><strong>Phloem:</strong> Transports sugars (food) from leaves to the rest of the plant.</li>
+            <li><strong>Stomata:</strong> Pores for gas exchange ($CO_2$ in, $O_2$ out).</li>
+          </ul>
+          
+
+[Image of plant vascular tissue showing xylem and phloem structure]
+
+          <iframe class="yt-video" src="https://www.youtube.com/embed/h9oDTMXM7M8" allowfullscreen title="Plant Structure Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="pollen flower seed germination biology">
+          <div class="card-glow"></div>
+          <h3>26. Flowers & Seeds</h3>
+          <ul>
+            <li><strong>Pollination:</strong> Transfer of pollen from anther to stigma.</li>
+            <li><strong>Fertilization:</strong> Fusion of sperm and egg to form a seed.</li>
+            <li><strong>Angiosperms:</strong> Flowering plants that protect seeds within fruit.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/ExaQ8shhkw8" allowfullscreen title="Plant Reproduction Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="extinction keystone species habitat biology">
+          <h3>27. The Web of Life</h3>
+          <ul>
+            <li><strong>Biodiversity:</strong> The variety of all living things in an ecosystem.</li>
+            <li><strong>Keystone Species:</strong> A species that has a disproportionately large effect on its environment.</li>
+            <li><strong>Threats:</strong> Habitat loss, invasive species, and climate change.</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/GK_vRtHJZu4" allowfullscreen title="Biodiversity Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="growth water light nutrients biology">
+          <div class="sim-info">
+            <h4>28. Plant Growth Lab</h4>
+            <p>Adjust sunlight, water, and soil type to see what makes a plant thrive.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html"></iframe> 
+          </div>
+
+        <div class="sim-tile" data-keywords="adaptation plants survival biology">
+          <div class="sim-info">
+            <h4>29. Adaptation Sim</h4>
+            <p>See how plants adapt their leaf size and root depth to different climates.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="carbon cycle global warming biology">
+          <div class="sim-info">
+            <h4>30. Earth's Atmosphere</h4>
+            <p>Explore how plants and gases regulate the planet's temperature.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/greenhouse-effect/latest/greenhouse-effect_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <footer class="glass-footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <span class="logo-accent">Quantum</span> Playground
+      </div>
+      <p class="credits">Developed by <strong>Malcolm and Yens</strong></p>
+      <div class="footer-links">
+        <span>Global Ranking Enabled</span> • 
+        <span>2026 Academic Suite</span> • 
+        <span>v3.0 Expanded</span>
+      </div>
+      <p class="copyright">© 2026 All Rights Reserved | Interactive Science Directory</p>
+    </div>
   </footer>
 
   <script>
@@ -127,33 +1109,44 @@
       sections.forEach(section => {
         const hasVisible = Array.from(section.querySelectorAll('.sim-tile, .note-card'))
                                 .some(el => el.style.display === 'block');
+        
+        // Show section if it has matching content OR if search is empty
         section.style.display = (hasVisible || input === "") ? "block" : "none";
       });
 
-      // No results found logic
+      // Error feedback for search
       if (!foundAny && input !== "") {
-        searchBox.style.borderColor = "#ef4444";
-        items.forEach(i => i.style.display = "block");
-        sections.forEach(s => s.style.display = "block");
+        searchBox.style.border = "1px solid #ef4444";
       } else {
-        searchBox.style.borderColor = "rgba(255, 255, 255, 0.1)";
+        searchBox.style.border = "1px solid rgba(255, 255, 255, 0.1)";
       }
     }
 
     function filterScience(subject) {
       const sections = document.querySelectorAll('.science-section');
       const buttons = document.querySelectorAll('.filter-btn');
+      
+      // Reset search bar when filtering
       document.getElementById('mainSearch').value = "";
+      
+      // Update button UI
       buttons.forEach(b => b.classList.remove('active'));
       document.getElementById('btn-' + subject).classList.add('active');
       
       sections.forEach(s => {
+        // Match based on section ID (e.g., physics-sec-1 matches 'physics')
         const isMatch = (subject === 'all' || s.id.startsWith(subject));
         s.style.display = isMatch ? 'block' : 'none';
-        if(isMatch) s.querySelectorAll('.sim-tile, .note-card').forEach(i => i.style.display = "block");
+        
+        // Reset item visibility within visible sections
+        if(isMatch) {
+          s.querySelectorAll('.sim-tile, .note-card').forEach(i => i.style.display = "block");
+        }
       });
+      
+      // Smooth scroll back to top of results
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 </body>
-      </html>
-                                                                   
+</html>
