@@ -13,30 +13,32 @@
 
   <header class="glass-header">
     <div class="header-content">
-      <div class="header-badge">v3.0 Academic Suite</div>
+      <div class="header-badge">Academic Suite 2026</div>
       <h1 class="logo-text">Quantum<span>Playground</span></h1>
-      <p class="tagline">Explore the laws of the universe in high definition.</p>
+      <p class="tagline">Interactive Science Directory • Notes • Sims • Videos</p>
     </div>
   </header>
 
   <nav class="peak-search-container" id="searchBox">
     <div class="search-wrapper">
-      <div class="search-icon">🔍</div>
-      <input type="text" class="search-input" id="mainSearch" placeholder="Search 90+ topics, simulations, and videos..." onkeyup="searchEverything()">
+      <span class="search-glass">🔍</span>
+      <input type="text" class="search-input" id="mainSearch" 
+             placeholder="Search 90+ modules..." 
+             onkeyup="searchEverything()">
     </div>
     
     <div class="filter-group">
       <button class="filter-btn active" id="btn-all" onclick="filterScience('all')">
-        <span class="btn-icon">🌐</span> All
+        <span class="icon">🌐</span> All
       </button>
       <button class="filter-btn" id="btn-physics" onclick="filterScience('physics')">
-        <span class="btn-icon">⚛️</span> Physics
+        <span class="icon">⚛️</span> Physics
       </button>
       <button class="filter-btn" id="btn-chemistry" onclick="filterScience('chemistry')">
-        <span class="btn-icon">🧪</span> Chemistry
+        <span class="icon">🧪</span> Chemistry
       </button>
       <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">
-        <span class="btn-icon">🧬</span> Biology
+        <span class="icon">🧬</span> Biology
       </button>
     </div>
   </nav>
