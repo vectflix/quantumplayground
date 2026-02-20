@@ -9,23 +9,35 @@
 </head>
 <body>
 
+  <div class="bg-glow"></div>
+
   <header class="glass-header">
     <div class="header-content">
-      <h1 class="logo-text">Quantum Playground</h1>
-      <p class="tagline">The Ultimate Science Directory for Students</p>
+      <div class="header-badge">v3.0 Academic Suite</div>
+      <h1 class="logo-text">Quantum<span>Playground</span></h1>
+      <p class="tagline">Explore the laws of the universe in high definition.</p>
     </div>
   </header>
 
   <nav class="peak-search-container" id="searchBox">
     <div class="search-wrapper">
-      <input type="text" class="search-input" id="mainSearch" placeholder="Search sims, notes, or videos..." onkeyup="searchEverything()">
+      <div class="search-icon">🔍</div>
+      <input type="text" class="search-input" id="mainSearch" placeholder="Search 90+ topics, simulations, and videos..." onkeyup="searchEverything()">
     </div>
     
     <div class="filter-group">
-      <button class="filter-btn active" id="btn-all" onclick="filterScience('all')">All</button>
-      <button class="filter-btn" id="btn-physics" onclick="filterScience('physics')">Physics</button>
-      <button class="filter-btn" id="btn-chemistry" onclick="filterScience('chemistry')">Chemistry</button>
-      <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">Biology</button>
+      <button class="filter-btn active" id="btn-all" onclick="filterScience('all')">
+        <span class="btn-icon">🌐</span> All
+      </button>
+      <button class="filter-btn" id="btn-physics" onclick="filterScience('physics')">
+        <span class="btn-icon">⚛️</span> Physics
+      </button>
+      <button class="filter-btn" id="btn-chemistry" onclick="filterScience('chemistry')">
+        <span class="btn-icon">🧪</span> Chemistry
+      </button>
+      <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">
+        <span class="btn-icon">🧬</span> Biology
+      </button>
     </div>
   </nav>
 
@@ -1148,5 +1160,51 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
+  <script>
+  function filterScience(subject) {
+    // 1. Update Button Styles
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    document.getElementById('btn-' + subject).classList.add('active');
+
+    // 2. Filter Content
+    const sections = document.querySelectorAll('.science-section');
+    sections.forEach(section => {
+      if (subject === 'all') {
+        section.style.display = 'block';
+      } else {
+        // Matches the ID (e.g., 'physics-sec-1' matches 'physics')
+        if (section.id.includes(subject)) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      }
+    });
+  }
+
+  function searchEverything() {
+    const query = document.getElementById('mainSearch').value.toLowerCase();
+    const cards = document.querySelectorAll('.note-card, .sim-tile');
+    
+    cards.forEach(card => {
+      const keywords = card.getAttribute('data-keywords') || "";
+      const text = card.innerText.toLowerCase();
+      
+      if (text.includes(query) || keywords.includes(query)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Hide empty sections during search
+    const sections = document.querySelectorAll('.science-section');
+    sections.forEach(section => {
+      const visibleItems = section.querySelectorAll('.note-card[style="display: block;"], .sim-tile[style="display: block;"]');
+      section.style.display = visibleItems.length > 0 || query === "" ? 'block' : 'none';
+    });
+  }
+</script>
 </body>
 </html>
