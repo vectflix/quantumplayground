@@ -9,42 +9,29 @@
 </head>
 <body>
 
-  <div class="bg-glow"></div>
-
   <header class="glass-header">
     <div class="header-content">
-      <div class="header-badge">Academic Suite 2026</div>
-      <h1 class="logo-text">Quantum<span>Playground</span></h1>
-      <p class="tagline">Interactive Science Directory • Notes • Sims • Videos</p>
+      <h1 class="logo-text">Quantum Playground</h1>
+      <p class="tagline">The Ultimate Science Directory for Students</p>
     </div>
   </header>
 
   <nav class="peak-search-container" id="searchBox">
     <div class="search-wrapper">
-      <span class="search-glass">🔍</span>
-      <input type="text" class="search-input" id="mainSearch" 
-             placeholder="Search 90+ modules..." 
-             onkeyup="searchEverything()">
+      <input type="text" class="search-input" id="mainSearch" placeholder="Search sims, notes, or videos..." onkeyup="searchEverything()">
     </div>
     
     <div class="filter-group">
-      <button class="filter-btn active" id="btn-all" onclick="filterScience('all')">
-        <span class="icon">🌐</span> All
-      </button>
-      <button class="filter-btn" id="btn-physics" onclick="filterScience('physics')">
-        <span class="icon">⚛️</span> Physics
-      </button>
-      <button class="filter-btn" id="btn-chemistry" onclick="filterScience('chemistry')">
-        <span class="icon">🧪</span> Chemistry
-      </button>
-      <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">
-        <span class="icon">🧬</span> Biology
-      </button>
+      <button class="filter-btn active" id="btn-all" onclick="filterScience('all')">All</button>
+      <button class="filter-btn" id="btn-physics" onclick="filterScience('physics')">Physics</button>
+      <button class="filter-btn" id="btn-chemistry" onclick="filterScience('chemistry')">Chemistry</button>
+      <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">Biology</button>
     </div>
   </nav>
 
   <main id="content-main" class="container">
     ```
+
     <section id="physics-sec-1" class="subject-card science-section">
       <div class="section-header">
         <span class="badge">Module 01</span>
@@ -1087,7 +1074,7 @@
         </div>
       </div>
     </section>
-    <footer class="glass-footer">
+   <footer class="glass-footer">
     <div class="footer-content">
       <div class="footer-logo">
         <span class="logo-accent">Quantum</span> Playground
@@ -1162,6 +1149,5 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
-
 </body>
 </html>
