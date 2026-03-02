@@ -4,280 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quantum Playground | Final Suite</title>
-  <style>
-/* =====================================================
-   QUANTUM PLAYGROUND — styles.css
-   ===================================================== */
-
-/* ── RESET ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: #080c14;
-  color: #e2e8f0;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* ambient glow background */
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 50% at 10% 0%,  rgba(99,102,241,.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(6,182,212,.08)  0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 50% 50%,  rgba(16,185,129,.05) 0%, transparent 70%);
-}
-
-/* ── HEADER ── */
-.glass-header {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(8,12,20,.90);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  padding: 22px 24px 18px;
-  text-align: center;
-}
-
-.header-content { max-width: 900px; margin: 0 auto; }
-
-.logo-text {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 800; letter-spacing: -1.5px; line-height: 1;
-  background: linear-gradient(135deg, #ffffff 30%, #6366f1 65%, #06b6d4 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 5px;
-}
-
-.tagline { color: #64748b; font-size: .88rem; font-weight: 300; }
-
-/* ── SEARCH & FILTER ── */
-.peak-search-container {
-  position: sticky; top: 86px; z-index: 90;
-  background: rgba(8,12,20,.94);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,.05);
-  padding: 12px 24px;
-  display: flex; flex-direction: column; gap: 10px; align-items: center;
-  transition: border .2s;
-}
-
-.search-wrapper {
-  width: 100%; max-width: 560px; position: relative;
-}
-
-.search-wrapper::before {
-  content: '🔍';
-  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-  font-size: 14px; pointer-events: none; z-index: 1;
-}
-
-.search-input {
-  width: 100%;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 12px;
-  padding: 12px 18px 12px 44px;
-  font-family: 'Inter', sans-serif; font-size: .92rem;
-  color: #e2e8f0; outline: none;
-  transition: border-color .2s, box-shadow .2s;
-}
-
-.search-input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99,102,241,.18);
-}
-
-.search-input::placeholder { color: #475569; }
-
-.filter-group {
-  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
-}
-
-.filter-btn {
-  padding: 7px 20px; border-radius: 100px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
-  color: #94a3b8;
-  font-family: 'Inter', sans-serif; font-size: .80rem; font-weight: 600;
-  cursor: pointer; transition: all .2s;
-}
-
-.filter-btn:hover { border-color: rgba(255,255,255,.25); color: #e2e8f0; }
-
-.filter-btn.active {
-  background: rgba(99,102,241,.18);
-  border-color: #6366f1; color: #a5b4fc;
-}
-
-/* ── MAIN CONTAINER ── */
-.container {
-  position: relative; z-index: 1;
-  max-width: 1300px; margin: 0 auto;
-  padding: 30px 20px 80px;
-}
-
-/* ── SUBJECT SECTION CARD ── */
-.subject-card {
-  background: rgba(255,255,255,.025);
-  border: 1px solid rgba(255,255,255,.07);
-  border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 28px;
-  transition: border-color .2s;
-}
-
-.subject-card:hover { border-color: rgba(255,255,255,.11); }
-
-.section-header {
-  display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
-}
-
-.badge {
-  font-size: .62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-  padding: 4px 11px; border-radius: 100px; flex-shrink: 0;
-  background: rgba(99,102,241,.14); border: 1px solid rgba(99,102,241,.28); color: #a5b4fc;
-}
-
-.section-header h2,
-.section-title {
-  font-size: 1.18rem; font-weight: 700; color: #f1f5f9; letter-spacing: -.3px;
-}
-
-.section-title { margin-bottom: 20px; }
-
-/* ── NOTES GRID ── */
-.notes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin-bottom: 22px;
-}
-
-/* ── NOTE CARD ── */
-.note-card {
-  position: relative;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.07);
-  border-radius: 14px; padding: 18px; overflow: hidden;
-  transition: border-color .2s, transform .2s, box-shadow .2s;
-}
-
-.note-card:hover {
-  border-color: rgba(99,102,241,.38);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(99,102,241,.10);
-}
-
-.card-glow {
-  position: absolute; top: -40px; right: -40px;
-  width: 120px; height: 120px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(99,102,241,.12), transparent 70%);
-  pointer-events: none;
-}
-
-.note-card h3 { font-size: .9rem; font-weight: 700; color: #c7d2fe; margin-bottom: 10px; }
-
-.note-card ul { list-style: none; margin-bottom: 14px; }
-
-.note-card ul li {
-  font-size: .81rem; color: #94a3b8; line-height: 1.65;
-  padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,.04);
-}
-
-.note-card ul li:last-child { border-bottom: none; }
-
-.note-card ul li strong { color: #cbd5e1; }
-
-/* ── YOUTUBE VIDEO ── */
-.yt-video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border: none;
-  border-radius: 10px;
-  margin-top: 6px;
-  background: #000;
-}
-
-/* ── SIM GRID ── */
-.sim-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
-}
-
-/* ── SIM TILE ── */
-.sim-tile {
-  background: rgba(6,182,212,.04);
-  border: 1px solid rgba(6,182,212,.15);
-  border-radius: 14px; overflow: hidden;
-  transition: border-color .2s, transform .2s, box-shadow .2s;
-}
-
-.sim-tile:hover {
-  border-color: rgba(6,182,212,.42);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(6,182,212,.10);
-}
-
-.sim-info { padding: 13px 15px 9px; }
-
-.sim-info h4 { font-size: .87rem; font-weight: 700; color: #67e8f9; margin-bottom: 4px; }
-
-.sim-info p { font-size: .77rem; color: #64748b; line-height: 1.5; }
-
-/* ── PHET IFRAME ── */
-.sim-tile iframe {
-  display: block;
-  width: 100%;
-  height: 380px;
-  border: none;
-}
-
-/* ── FOOTER ── */
-.glass-footer {
-  position: relative; z-index: 1;
-  background: rgba(8,12,20,.92);
-  border-top: 1px solid rgba(255,255,255,.07);
-  padding: 40px 24px; text-align: center;
-}
-
-.footer-content { max-width: 600px; margin: 0 auto; }
-
-.footer-logo { font-size: 1.25rem; font-weight: 800; color: #e2e8f0; margin-bottom: 8px; }
-
-.logo-accent { color: #6366f1; }
-
-.credits { font-size: .84rem; color: #64748b; margin-bottom: 8px; }
-
-.footer-links { font-size: .74rem; color: #475569; margin-bottom: 8px; }
-
-.footer-links span { margin: 0 4px; }
-
-.copyright { font-size: .70rem; color: #334155; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .notes-grid,
-  .sim-grid { grid-template-columns: 1fr; }
-  .subject-card { padding: 18px; }
-  .sim-tile iframe { height: 260px; }
-}
-
-@media (max-width: 480px) {
-  .glass-header { padding: 16px 16px 12px; }
-  .peak-search-container { top: 78px; padding: 10px 14px; }
-  .filter-btn { padding: 5px 14px; font-size: .75rem; }
-  .container { padding: 18px 12px 60px; }
-}
-
-</style>
+  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -291,198 +18,174 @@ body::before {
 
   <nav class="peak-search-container" id="searchBox">
     <div class="search-wrapper">
-      <input type="text" class="search-input" id="mainSearch"
-             placeholder="Search sims, notes, or videos..."
-             onkeyup="searchEverything()">
+      <input type="text" class="search-input" id="mainSearch" placeholder="Search sims, notes, or videos..." onkeyup="searchEverything()">
     </div>
+    
     <div class="filter-group">
-      <button class="filter-btn active" id="btn-all"       onclick="filterScience('all')">All</button>
-      <button class="filter-btn"        id="btn-physics"   onclick="filterScience('physics')">Physics</button>
-      <button class="filter-btn"        id="btn-chemistry" onclick="filterScience('chemistry')">Chemistry</button>
-      <button class="filter-btn"        id="btn-biology"   onclick="filterScience('biology')">Biology</button>
+      <button class="filter-btn active" id="btn-all" onclick="filterScience('all')">All</button>
+      <button class="filter-btn" id="btn-physics" onclick="filterScience('physics')">Physics</button>
+      <button class="filter-btn" id="btn-chemistry" onclick="filterScience('chemistry')">Chemistry</button>
+      <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">Biology</button>
     </div>
   </nav>
 
   <main id="content-main" class="container">
+    ```
 
-    <!-- ================================================
-         PHYSICS
-    ================================================ -->
-
-    <!-- PHYSICS MODULE 01 -->
     <section id="physics-sec-1" class="subject-card science-section">
       <div class="section-header">
         <span class="badge">Module 01</span>
-        <h2>🔭 Mechanics &amp; Fundamental Dynamics</h2>
+        <h2>🔭 Mechanics & Fundamental Dynamics</h2>
       </div>
 
       <div class="notes-grid">
-
         <div class="note-card" data-keywords="kinematics velocity acceleration displacement physics">
           <div class="card-glow"></div>
           <h3>1. Kinematics</h3>
           <ul>
-            <li><strong>Displacement:</strong> Vector change in position (Δx).</li>
-            <li><strong>Velocity:</strong> Rate of change of displacement (v = Δx / Δt).</li>
-            <li><strong>Acceleration:</strong> Rate of change of velocity (a = Δv / Δt).</li>
+            <li><strong>Displacement:</strong> Vector change in position ($\Delta x$).</li>
+            <li><strong>Velocity:</strong> Rate of change of displacement ($v = \Delta x / \Delta t$).</li>
+            <li><strong>Acceleration:</strong> Rate of change of velocity ($a = \Delta v / \Delta t$).</li>
           </ul>
-          <iframe class="yt-video" src="https://www.youtube-nocookie.com/embed/rZ-p-pM8Y_Q?rel=0" allowfullscreen loading="lazy" title="Kinematics Video"></iframe>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/rZ-p-pM8Y_Q" allowfullscreen title="Kinematics Video"></iframe>
         </div>
 
         <div class="note-card" data-keywords="newton laws inertia force ma physics">
           <div class="card-glow"></div>
           <h3>2. Newton's Laws of Motion</h3>
           <ul>
-            <li><strong>1st Law:</strong> Inertia — Objects resist changes in motion.</li>
-            <li><strong>2nd Law:</strong> Fundamental law (F = ma).</li>
-            <li><strong>3rd Law:</strong> Action &amp; Reaction are equal and opposite.</li>
+            <li><strong>1st Law:</strong> Inertia - Objects resist changes in motion.</li>
+            <li><strong>2nd Law:</strong> Fundamental law ($F = ma$).</li>
+            <li><strong>3rd Law:</strong> Action & Reaction are equal and opposite.</li>
           </ul>
-          <iframe class="yt-video" src="https://www.youtube-nocookie.com/embed/kKKM8Y-u7ds?rel=0" allowfullscreen loading="lazy" title="Newton's Laws Video"></iframe>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/kKKM8Y-u7ds" allowfullscreen title="Newton's Laws Video"></iframe>
         </div>
 
         <div class="note-card" data-keywords="work energy power kinetic potential physics">
           <div class="card-glow"></div>
-          <h3>3. Work, Energy &amp; Power</h3>
+          <h3>3. Work, Energy & Power</h3>
           <ul>
-            <li><strong>Work:</strong> Product of force and displacement (W = Fd cos θ).</li>
-            <li><strong>Energy:</strong> Kinetic (½mv²) and Potential (mgh).</li>
-            <li><strong>Power:</strong> The rate of doing work (P = W/t).</li>
+            <li><strong>Work:</strong> Product of force and displacement ($W = Fd \cos \theta$).</li>
+            <li><strong>Energy:</strong> Kinetic ($\frac{1}{2}mv^2$) and Potential ($mgh$).</li>
+            <li><strong>Power:</strong> The rate of doing work ($P = W/t$).</li>
           </ul>
-          <iframe class="yt-video" src="https://www.youtube-nocookie.com/embed/2WCT0W8Ljdg?rel=0" allowfullscreen loading="lazy" title="Energy Video"></iframe>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/2WCT0W8Ljdg" allowfullscreen title="Energy Video"></iframe>
         </div>
-
-      </div><!-- /notes-grid -->
+      </div>
 
       <div class="sim-grid">
-
         <div class="sim-tile" data-keywords="projectile launch angle trajectory physics">
           <div class="sim-info">
             <h4>4. Projectile Motion</h4>
             <p>Analyze the parabolic flight of objects under gravity.</p>
           </div>
-          <iframe src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html"></iframe>
         </div>
 
         <div class="sim-tile" data-keywords="friction force net force motion physics">
           <div class="sim-info">
-            <h4>5. Forces &amp; Motion</h4>
+            <h4>5. Forces & Motion</h4>
             <p>Adjust friction and mass to see Newton's 2nd Law in action.</p>
           </div>
-          <iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html"></iframe>
         </div>
 
         <div class="sim-tile" data-keywords="gravity orbits space mass distance physics">
           <div class="sim-info">
-            <h4>6. Gravity &amp; Orbits</h4>
+            <h4>6. Gravity & Orbits</h4>
             <p>Explore the gravitational dance between celestial bodies.</p>
           </div>
-          <iframe src="https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_en.html" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_en.html"></iframe>
         </div>
-
-      </div><!-- /sim-grid -->
+      </div>
     </section>
-
-    <!-- PHYSICS MODULE 02 -->
     <section id="physics-sec-2" class="subject-card science-section">
-      <div class="section-header">
-        <span class="badge">Module 02</span>
-        <h2>🌊 Waves &amp; Thermodynamics</h2>
-      </div>
+  <h2 class="section-title">🌊 Physics Part 2: Waves & Thermodynamics</h2>
 
-      <div class="notes-grid">
+  <div class="notes-grid">
+    <div class="note-card" data-keywords="waves frequency amplitude wavelength physics">
+      <h3>7. Wave Properties</h3>
+      <ul>
+        <li><strong>Transverse:</strong> Oscillation perpendicular to travel (Light).</li>
+        <li><strong>Longitudinal:</strong> Oscillation parallel to travel (Sound).</li>
+        <li><strong>Equation:</strong> $ v = f\lambda $ (Velocity = frequency × wavelength).</li>
+      </ul>
+      
 
-        <div class="note-card" data-keywords="waves frequency amplitude wavelength physics">
-          <div class="card-glow"></div>
-          <h3>7. Wave Properties</h3>
-          <ul>
-            <li><strong>Transverse:</strong> Oscillation perpendicular to travel (Light).</li>
-            <li><strong>Longitudinal:</strong> Oscillation parallel to travel (Sound).</li>
-            <li><strong>Equation:</strong> v = fλ (Velocity = frequency × wavelength).</li>
-          </ul>
-          <iframe class="yt-video" src="https://www.youtube-nocookie.com/embed/RVyHkV3wIqQ?rel=0" allowfullscreen loading="lazy"></iframe>
-        </div>
+[Image of a transverse wave vs longitudinal wave]
 
-        <div class="note-card" data-keywords="heat temperature entropy laws thermo physics">
-          <div class="card-glow"></div>
-          <h3>8. Laws of Thermodynamics</h3>
-          <ul>
-            <li><strong>1st Law:</strong> Energy conservation (ΔU = Q − W).</li>
-            <li><strong>2nd Law:</strong> Entropy of an isolated system always increases.</li>
-            <li><strong>0th Law:</strong> Thermal equilibrium concept.</li>
-          </ul>
-          <iframe class="yt-video" src="https://www.youtube-nocookie.com/embed/4i1_Lz02re4?rel=0" allowfullscreen loading="lazy"></iframe>
-        </div>
+      <iframe class="yt-video" src="https://www.youtube.com/embed/RVyHkV3wIqQ" allowfullscreen></iframe>
+    </div>
 
-        <div class="note-card" data-keywords="light optics mirror lens snell physics">
-          <div class="card-glow"></div>
-          <h3>9. Geometric Optics</h3>
-          <ul>
-            <li><strong>Reflection:</strong> Angle of incidence = Angle of reflection.</li>
-            <li><strong>Refraction:</strong> Bending of light (Snell's Law: n₁ sin θ₁ = n₂ sin θ₂).</li>
-          </ul>
-          <iframe class="yt-video" src="https://www.youtube-nocookie.com/embed/95V-QJYZ2Dw?rel=0" allowfullscreen loading="lazy"></iframe>
-        </div>
+    <div class="note-card" data-keywords="heat temperature entropy laws thermo physics">
+      <h3>8. Laws of Thermodynamics</h3>
+      <ul>
+        <li><strong>1st Law:</strong> Energy conservation ($\Delta U = Q - W$).</li>
+        <li><strong>2nd Law:</strong> Entropy of an isolated system always increases.</li>
+        <li><strong>0th Law:</strong> Thermal equilibrium concept.</li>
+      </ul>
+      <iframe class="yt-video" src="https://www.youtube.com/embed/4i1_Lz02re4" allowfullscreen></iframe>
+    </div>
 
-      </div>
+    <div class="note-card" data-keywords="light optics mirror lens snell physics">
+      <h3>9. Geometric Optics</h3>
+      <ul>
+        <li><strong>Reflection:</strong> Angle of incidence = Angle of reflection.</li>
+        <li><strong>Refraction:</strong> Bending of light (Snell's Law: $n_1 \sin\theta_1 = n_2 \sin\theta_2$).</li>
+      </ul>
+      <iframe class="yt-video" src="https://www.youtube.com/embed/95V-QJYZ2Dw" allowfullscreen></iframe>
+    </div>
+  </div>
 
-      <div class="sim-grid">
+  <div class="sim-grid">
+    <div class="sim-tile" data-keywords="interference double slit diffraction waves physics">
+      <h4>10. Wave Interference</h4>
+      <p>Observe constructive and destructive interference patterns.</p>
+      <iframe src="https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_en.html"></iframe>
+    </div>
 
-        <div class="sim-tile" data-keywords="interference double slit diffraction waves physics">
-          <div class="sim-info">
-            <h4>10. Wave Interference</h4>
-            <p>Observe constructive and destructive interference patterns.</p>
-          </div>
-          <iframe src="https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_en.html" allowfullscreen loading="lazy"></iframe>
-        </div>
+    <div class="sim-tile" data-keywords="refraction prism light glass physics">
+      <h4>11. Bending Light</h4>
+      <p>Explore how light travels through different mediums and prisms.</p>
+      <iframe src="https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html"></iframe>
+    </div>
 
-        <div class="sim-tile" data-keywords="refraction prism light glass physics">
-          <div class="sim-info">
-            <h4>11. Bending Light</h4>
-            <p>Explore how light travels through different mediums and prisms.</p>
-          </div>
-          <iframe src="https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html" allowfullscreen loading="lazy"></iframe>
-        </div>
-
-        <div class="sim-tile" data-keywords="spring hooke law oscillator harmonic physics">
-          <div class="sim-info">
-            <h4>12. Hooke's Law &amp; SHM</h4>
-            <p>Test the relationship between force, mass, and spring constants.</p>
-          </div>
-          <iframe src="https://phet.colorado.edu/sims/html/masses-and-springs/latest/masses-and-springs_en.html" allowfullscreen loading="lazy"></iframe>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PHYSICS MODULE 03 -->
-    <section id="physics-sec-3" class="subject-card science-section">
+    <div class="sim-tile" data-keywords="spring hooke law oscillator harmonic physics">
+      <h4>12. Hooke's Law & SHM</h4>
+      <p>Test the relationship between force, mass, and spring constants.</p>
+      <iframe src="https://phet.colorado.edu/sims/html/masses-and-springs/latest/masses-and-springs_en.html"></iframe>
+    </div>
+  </div>
+</section>
+<section id="physics-sec-3" class="subject-card science-section">
       <div class="section-header">
         <span class="badge">Module 03</span>
-        <h2>⚡ Electricity &amp; Magnetic Fields</h2>
+        <h2>⚡ Electricity & Magnetic Fields</h2>
       </div>
 
       <div class="notes-grid">
-
         <div class="note-card" data-keywords="electrostatics charge coulomb protons electrons physics">
           <div class="card-glow"></div>
           <h3>13. Electrostatics</h3>
           <ul>
-            <li><strong>Charge:</strong> Measured in Coulombs (C).</li>
-            <li><strong>Coulomb's Law:</strong> Force between charges (F = k q₁q₂/r²).</li>
+            <li><strong>Charge:</strong> Measured in Coulombs ($C$).</li>
+            <li><strong>Coulomb's Law:</strong> Force between charges ($F = k \frac{q_1q_2}{r^2}$).</li>
             <li><strong>Insulators vs Conductors:</strong> Ability for charge to flow.</li>
           </ul>
-          <iframe class="yt-video" src="https://www.youtube-nocookie.com/embed/TFlRWtmB0No?rel=0" allowfullscreen loading="lazy" title="Electrostatics Video"></iframe>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/TFlRWtmB0No" allowfullscreen title="Electrostatics Video"></iframe>
         </div>
 
         <div class="note-card" data-keywords="circuits ohm law voltage current resistance physics">
           <div class="card-glow"></div>
-          <h3>14. Ohm's Law &amp; Circuits</h3>
+          <h3>14. Ohm's Law & Circuits</h3>
           <ul>
-            <li><strong>Ohm's Law:</strong> V = IR (Voltage = Current × Resistance).</li>
+            <li><strong>Ohm's Law:</strong> $V = IR$ (Voltage = Current × Resistance).</li>
             <li><strong>Series:</strong> Current is constant; voltages add up.</li>
             <li><strong>Parallel:</strong> Voltage is constant; currents add up.</li>
           </ul>
-          <iframe class="yt-video" src="https://www.youtube-nocookie.com/embed/Xn0vV_VIny8?rel=0" allowfullscreen loading="lazy" title="Circuits Video"></iframe>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/Xn0vV_VIny8" allowfullscreen title="Circuits Video"></iframe>
         </div>
 
         <div class="note-card" data-keywords="magnetism induction faraday flux physics">
@@ -493,27 +196,25 @@ body::before {
             <li><strong>Faraday's Law:</strong> Changing magnetic fields induce current.</li>
             <li><strong>Right-Hand Rule:</strong> Determining force and field direction.</li>
           </ul>
-          <iframe class="yt-video" src="https://www.youtube-nocookie.com/embed/hqZtc8W9Ym8?rel=0" allowfullscreen loading="lazy" title="Electromagnetism Video"></iframe>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/hqZtc8W9Ym8" allowfullscreen title="Electromagnetism Video"></iframe>
         </div>
-
       </div>
 
       <div class="sim-grid">
-
         <div class="sim-tile" data-keywords="circuit battery bulb resistor dc physics">
           <div class="sim-info">
             <h4>16. Circuit Lab (DC)</h4>
             <p>Build virtual circuits with batteries, bulbs, and switches.</p>
           </div>
-          <iframe src="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html"></iframe>
         </div>
 
         <div class="sim-tile" data-keywords="electric field potential voltage charge physics">
           <div class="sim-info">
-            <h4>17. Charges &amp; Fields</h4>
+            <h4>17. Charges & Fields</h4>
             <p>Visualize the invisible electric field lines around point charges.</p>
           </div>
-          <iframe src="https://phet.colorado.edu/sims/html/charges-and-fields/latest/charges-and-fields_en.html" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://phet.colorado.edu/sims/html/charges-and-fields/latest/charges-and-fields_en.html"></iframe>
         </div>
 
         <div class="sim-tile" data-keywords="induction magnet coil voltage physics">
@@ -521,24 +222,192 @@ body::before {
             <h4>18. Faraday's Law</h4>
             <p>Move a magnet through a coil to light up a bulb via induction.</p>
           </div>
-          <iframe src="https://phet.colorado.edu/sims/html/faradays-law/latest/faradays-law_en.html" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://phet.colorado.edu/sims/html/faradays-law/latest/faradays-law_en.html"></iframe>
         </div>
-
       </div>
     </section>
-
-    <!-- PHYSICS MODULE 04 -->
     <section id="physics-sec-4" class="subject-card science-section">
       <div class="section-header">
         <span class="badge">Module 04</span>
-        <h2>⚛️ Modern &amp; Nuclear Physics</h2>
+        <h2>⚛️ Modern & Nuclear Physics</h2>
       </div>
 
       <div class="notes-grid">
-
         <div class="note-card" data-keywords="atom bohr rutherford dalton quantum physics">
           <div class="card-glow"></div>
           <h3>19. Atomic Structure</h3>
           <ul>
             <li><strong>Rutherford:</strong> Discovered the dense, positive nucleus.</li>
-    
+            <li><strong>Bohr Model:</strong> Electrons exist in discrete energy levels.</li>
+            <li><strong>Quantum Model:</strong> Electrons as probability clouds (orbitals).</li>
+          </ul>
+          
+
+[Image of the Bohr model of the atom vs the Quantum Mechanical model]
+
+          <iframe class="yt-video" src="https://www.youtube.com/embed/NSAgLvKOPLQ" allowfullscreen title="Atomic Models Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="nuclear decay alpha beta gamma half-life physics">
+          <div class="card-glow"></div>
+          <h3>20. Nuclear Decay</h3>
+          <ul>
+            <li><strong>Alpha ($\alpha$):</strong> Emission of a Helium nucleus.</li>
+            <li><strong>Beta ($\beta$):</strong> Transformation of a neutron to a proton.</li>
+            <li><strong>Half-Life:</strong> Time required for half of a sample to decay.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/fES21EHP7Ww" allowfullscreen title="Radioactivity Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="einstein relativity time dilation light photon physics">
+          <div class="card-glow"></div>
+          <h3>21. Special Relativity</h3>
+          <ul>
+            <li><strong>Time Dilation:</strong> Time slows down at high speeds.</li>
+            <li><strong>Mass-Energy:</strong> $E = mc^2$.</li>
+            <li><strong>Photoelectric Effect:</strong> Light behaving as particles (photons).</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/ev9zrt__lec" allowfullscreen title="Relativity Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="nucleus gold foil alpha particles physics">
+          <div class="sim-info">
+            <h4>22. Rutherford Scattering</h4>
+            <p>Shoot alpha particles at atoms to see how the nucleus was discovered.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="isotopes protons neutrons stability physics">
+          <div class="sim-info">
+            <h4>23. Build a Nucleus</h4>
+            <p>Add protons and neutrons to create stable isotopes and observe decay.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/build-a-nucleus/latest/build-a-nucleus_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="photon electron light metal physics">
+          <div class="sim-info">
+            <h4>24. Photoelectric Effect</h4>
+            <p>Experiment with light intensity and frequency to eject electrons.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/photoelectric-effect/latest/photoelectric-effect_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="physics-sec-5" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 05</span>
+        <h2>🌌 Fluids & The Cosmos</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="buoyancy archimedes pressure bernoulli fluids physics">
+          <div class="card-glow"></div>
+          <h3>25. Fluid Mechanics</h3>
+          <ul>
+            <li><strong>Archimedes' Principle:</strong> Buoyant force equals weight of displaced fluid.</li>
+            <li><strong>Bernoulli’s Principle:</strong> Fast moving air creates low pressure.</li>
+            <li><strong>Pressure:</strong> $P = F/A$ (Force divided by Area).</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/nST30m3YmI0" allowfullscreen title="Fluids Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="boyle charles ideal gas kelvin physics">
+          <div class="card-glow"></div>
+          <h3>26. The Gas Laws</h3>
+          <ul>
+            <li><strong>Boyle's Law:</strong> Pressure is inversely proportional to Volume.</li>
+            <li><strong>Ideal Gas Law:</strong> $PV = nRT$.</li>
+            <li><strong>Absolute Zero:</strong> $0\text{ K}$ (where all molecular motion stops).</li>
+          </ul>
+          <iframe class="yt-video" src="https://www.youtube.com/embed/TQ_W_f2z0_I" allowfullscreen title="Gas Laws Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="stars black holes galaxy big bang physics">
+          <div class="card-glow"></div>
+          <h3>27. Cosmology & Stars</h3>
+          <ul>
+            <li><strong>Stellar Life Cycle:</strong> From Nebula to White Dwarf or Supernova.</li>
+            <li><strong>Black Holes:</strong> Regions of spacetime where gravity prevents light escape.</li>
+            <li><strong>Expansion:</strong> Hubble’s Law and the Big Bang Theory.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/9EnBBIx6XkM" allowfullscreen title="Astrophysics Video"></iframe>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-tile" data-keywords="density float sink water physics">
+          <div class="sim-info">
+            <h4>28. Buoyancy</h4>
+            <p>Drop objects into fluids to see why they float or sink based on density.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/buoyancy/latest/buoyancy_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="temperature pressure pump volume physics">
+          <div class="sim-info">
+            <h4>29. Gas Properties</h4>
+            <p>Pump gas molecules into a box and observe effects of temperature and pressure.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html"></iframe>
+        </div>
+
+        <div class="sim-tile" data-keywords="planets orbit solar system gravity physics">
+          <div class="sim-info">
+            <h4>30. My Solar System</h4>
+            <p>Create your own planetary systems and watch orbital mechanics in real-time.</p>
+          </div>
+          <iframe src="https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_en.html"></iframe>
+        </div>
+      </div>
+    </section>
+  </main> ```
+<section id="chemistry-sec-1" class="subject-card science-section">
+      <div class="section-header">
+        <span class="badge">Module 01</span>
+        <h2>🧪 Atoms, Molecules & States of Matter</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" data-keywords="atom proton neutron electron nucleus chemistry">
+          <div class="card-glow"></div>
+          <h3>1. Atomic Structure</h3>
+          <ul>
+            <li><strong>Protons:</strong> Positive charge; determines identity.</li>
+            <li><strong>Neutrons:</strong> Neutral charge; determines isotope.</li>
+            <li><strong>Electrons:</strong> Negative charge; determines reactivity.</li>
+          </ul>
+          
+          <iframe class="yt-video" src="https://www.youtube.com/embed/O5iaw5WNuB0" allowfullscreen title="Atomic Structure Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="solid liquid gas plasma phase chemistry">
+          <div class="card-glow"></div>
+          <h3>2. States of Matter</h3>
+          <ul>
+            <li><strong>Solid:</strong> Fixed shape and volume; low energy.</li>
+            <li><strong>Liquid:</strong> Fixed volume; takes shape of container.</li>
+            <li><strong>Gas:</strong> No fixed shape or volume; high energy.</li>
+          </ul>
+          
+
+[Image of the molecular arrangement in solids, liquids, and gases]
+
+          <iframe class="yt-video" src="https://www.youtube.com/embed/HAPc6JH8OTk" allowfullscreen title="States of Matter Video"></iframe>
+        </div>
+
+        <div class="note-card" data-keywords="periodic table groups periods elements chemistry">
+          <div class="card-glow"></div>
+          <h3>3. The Periodic Table</h3>
+          <ul>
+            <li><strong>Groups:</strong> Columns with similar chemical properties.</li>
+            <li><strong>Periods:</strong> Rows representing electron shells.</li>
+            <li><strong>Trends:</strong> Electronegativity and Ionization Energy.</li>
+          </ul>
+          <iframe class="yt-video" src
