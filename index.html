@@ -10,11 +10,37 @@
 <body>
 
   <header class="glass-header">
+    <div id="guide-container" class="guide-float">
+    <div class="guide-bubble" id="guideText">Hello, Scientist! Let's explore the universe!</div>
+    <div class="guide-avatar">⚛️</div>
+  </div>
+
+  <header class="glass-header">
     <div class="header-content">
-      <h1 class="logo-text">Quantum Playground</h1>
-      <p class="tagline">The Ultimate Science Directory for Students</p>
+      <div class="user-status" id="userDisplay" onclick="toggleLogin()">
+        <span id="userNameDisplay">Guest Scientist</span>
+        <div class="xp-bar-container">
+          <div class="xp-progress" id="mainProgress" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <h1 class="logo-text">Quantum<span>Playground</span></h1>
+      
+      <div class="achievement-track" id="achievementList">
+        <span class="badge lock" title="First Quiz Completed">🧠</span>
+        <span class="badge lock" title="Physics Master">🔭</span>
+        <span class="badge lock" title="Chemistry Wiz">🧪</span>
+      </div>
     </div>
   </header>
+
+  <div id="loginOverlay" class="login-modal" style="display:none;">
+    <div class="modal-box">
+      <h3>Initialize Session</h3>
+      <input type="text" id="usernameInput" placeholder="Enter your name...">
+      <button onclick="saveUser()">Start Journey</button>
+    </div>
+  </div>
 
   <nav class="peak-search-container" id="searchBox">
     <div class="search-wrapper">
@@ -28,7 +54,6 @@
       <button class="filter-btn" id="btn-biology" onclick="filterScience('biology')">Biology</button>
     </div>
   </nav>
-
   <main id="content-main" class="container">
     ```
 
