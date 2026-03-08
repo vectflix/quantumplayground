@@ -212,3 +212,21 @@ h3 { margin: 5px 0 15px 0; font-size: 1.6rem; font-weight: 700; }
     .glass-nav { padding: 15px; }
     .controls { flex-direction: column; gap: 10px; width: 100%; }
 }
+/* Add this to your existing styles.css */
+.download-btn {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid var(--bio);
+    color: var(--bio);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.download-btn:hover {
+    background: var(--bio);
+    color: white;
+}
