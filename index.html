@@ -10,15 +10,18 @@
 </head>
 <body>
 
+    <div id="particle-container"></div>
+
     <div id="login-gate" class="login-overlay">
         <div class="glass-box">
             <div class="brand-logo">⚛️</div>
             <h1>Quantum<span>Playground</span></h1>
-            <p>Initialize your 2026 Research Session</p>
+            <p>2026 Research Terminal</p>
             <div class="input-group">
                 <input type="text" id="username" placeholder="Enter Scientist Name..." autocomplete="off">
             </div>
             <button onclick="initSession()" class="start-btn">Access Lab</button>
+            <p class="dev-tag-mini">Developed by Malcom & Yens</p>
         </div>
     </div>
 
@@ -27,7 +30,10 @@
             <div class="nav-content">
                 <div class="brand">
                     <h1>Quantum<span>Playground</span></h1>
-                    <p id="welcome-msg">Welcome, Scientist</p>
+                    <div class="user-meta">
+                        <p id="welcome-msg">Welcome, Scientist</p>
+                        <span id="session-timer">Session: 00:00</span>
+                    </div>
                 </div>
                 <div class="controls">
                     <input type="text" id="searchBar" placeholder="Search topics..." onkeyup="filterContent()">
@@ -46,29 +52,34 @@
 
         <footer class="quantum-footer">
             <div class="footer-content">
+                <div class="footer-section main-credit">
+                    <h4>Quantum<span>Playground</span></h4>
+                    <p class="creator-badge">Core Engineers: <strong>Malcom & Yens</strong></p>
+                    <p>Advanced Visualization Suite v2.1</p>
+                </div>
                 <div class="footer-section">
                     <h4>Lab Status</h4>
-                    <p id="stat-rank">Rank: Junior Researcher</p>
+                    <p id="stat-rank">Rank: Senior Researcher</p>
                     <p id="stat-count">Modules Loaded: 27</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Navigation</h4>
+                    <h4>Navigation</h4>
                     <div class="footer-links">
-                        <a href="#top">Return to Top</a>
-                        <a href="https://phet.colorado.edu/" target="_blank">Full PhET Library</a>
+                        <a href="#top">Scroll to Top</a>
+                        <a href="https://phet.colorado.edu/" target="_blank">External Simulations</a>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h4>System</h4>
-                    <p>Version: 2.0.26-Alpha</p>
-                    <p>&copy; 2026 Quantum Playground</p>
+                <div class="footer-section system-tag">
+                    <h4>System Info</h4>
+                    <p>Encryption: Active</p>
+                    <p>&copy; 2026 Malcom & Yens</p>
                 </div>
             </div>
         </footer>
     </div>
 
     <script>
-        // MASTER DATA SOURCE
+        // MASTER DATA SOURCE (Full 27 Modules)
         const DATA = [
             // PHYSICS
             { id: 0, subject: "physics", title: "Kinematics & Motion", text: "The study of displacement, velocity, and acceleration.", math: "$$v = u + at$$ $$s = ut + \\frac{1}{2}at^2$$", yt: "rZ-p-pM8Y_Q", sim: "https://phet.colorado.edu/sims/html/moving-man/latest/moving-man_all.html" },
@@ -104,13 +115,19 @@
             { id: 26, subject: "biology", title: "Ecology", text: "Food webs and energy transfer in ecosystems.", math: "$$\\text{10% Energy Rule}$$", yt: "hLq2datPo5M", sim: "https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_all.html" }
         ];
 
-        // SESSION LOGIC
+        // SESSION TIMER
+        let startTime;
+        function updateTimer() {
+            const now = new Date();
+            const diff = Math.floor((now - startTime) / 1000);
+            const m = String(Math.floor(diff / 60)).padStart(2, '0');
+            const s = String(diff % 60).padStart(2, '0');
+            document.getElementById('session-timer').innerText = `Session: ${m}:${s}`;
+        }
+
         function initSession() {
             const name = document.getElementById('username').value;
-            if (name.length < 2) {
-                alert("Please enter a valid name.");
-                return;
-            }
+            if (name.length < 2) { alert("Credentials Required."); return; }
             localStorage.setItem('quantum_user', name);
             showApp(name);
         }
@@ -118,11 +135,12 @@
         function showApp(name) {
             document.getElementById('login-gate').style.display = 'none';
             document.getElementById('main-app').style.display = 'block';
-            document.getElementById('welcome-msg').innerText = `Welcome, Scientist ${name}`;
+            document.getElementById('welcome-msg').innerText = `Scientist: ${name}`;
+            startTime = new Date();
+            setInterval(updateTimer, 1000);
             render();
         }
 
-        // RENDER CARDS
         function render() {
             const grid = document.getElementById('content-grid');
             grid.innerHTML = DATA.map(topic => `
@@ -156,7 +174,22 @@
         window.onload = () => {
             const savedUser = localStorage.getItem('quantum_user');
             if (savedUser) showApp(savedUser);
+            createParticles();
         };
+
+        // BACKGROUND PARTICLES EFFECT
+        function createParticles() {
+            const container = document.getElementById('particle-container');
+            for(let i=0; i<30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = Math.random() * 100 + 'vh';
+                p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                p.style.opacity = Math.random();
+                container.appendChild(p);
+            }
+        }
     </script>
 </body>
 </html>
