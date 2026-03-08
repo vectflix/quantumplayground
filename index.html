@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Playground | Modular Suite</title>
+    <title>Quantum Playground | Unified Suite</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -11,48 +11,67 @@
 <body>
 
     <header class="glass-nav">
-        <h1>Quantum<span>Playground</span></h1>
-        <div id="user-stats">Level 1 | 0 XP</div>
+        <div class="nav-content">
+            <h1>Quantum<span>Playground</span></h1>
+            <div class="controls">
+                <input type="text" id="searchBar" placeholder="Search topics..." onkeyup="filterContent()">
+                <select id="subjectFilter" onchange="filterContent()">
+                    <option value="all">All Subjects</option>
+                    <option value="physics">Physics</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="biology">Biology</option>
+                </select>
+            </div>
+        </div>
     </header>
 
-    <main id="content-grid" class="grid-layout">
-        </main>
+    <main id="content-grid" class="grid-layout"></main>
+
+    <script src="notes.js"></script>
+    <script src="videos.js"></script>
+    <script src="sims.js"></script>
 
     <script>
-        // THE LOADER ENGINE
-        async function buildLab() {
+        function buildLab() {
             const grid = document.getElementById('content-grid');
+            grid.innerHTML = '';
             
-            // We combine data from your 3 specific files
-            const [notes, videos, sims] = [window.NOTES_DATA, window.VIDEOS_DATA, window.SIMS_DATA];
-
-            notes.forEach((topic, index) => {
+            window.NOTES_DATA.forEach((topic, i) => {
                 const card = document.createElement('article');
                 card.className = `note-card ${topic.subject}`;
+                card.setAttribute('data-subject', topic.subject);
                 
                 card.innerHTML = `
-                    <div class="badge">${topic.subject.toUpperCase()}</div>
+                    <div class="badge">${topic.subject}</div>
                     <h3>${topic.title}</h3>
-                    <p>${topic.text}</p>
+                    <div class="content-text">${topic.text}</div>
                     <div class="equation-block">${topic.math}</div>
-                    
-                    <iframe class="video-frame" src="https://www.youtube.com/embed/${videos[index].ytID}" loading="lazy"></iframe>
-                    
+                    <iframe class="video-frame" src="https://www.youtube.com/embed/${window.VIDEOS_DATA[i].ytID}" loading="lazy" allowfullscreen></iframe>
                     <div class="sim-box">
-                        <p>🔬 Interactive Lab:</p>
-                        <iframe src="${sims[index].url}" class="phet-sim"></iframe>
+                        <p class="sim-label">🔬 Interactive Simulation</p>
+                        <iframe src="${window.SIMS_DATA[i].url}" class="phet-sim"></iframe>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
-        
-        // Run when files are loaded
+
+        function filterContent() {
+            const query = document.getElementById('searchBar').value.toLowerCase();
+            const subject = document.getElementById('subjectFilter').value;
+            const cards = document.querySelectorAll('.note-card');
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                const cardSubject = card.getAttribute('data-subject');
+                const matchesSearch = text.includes(query);
+                const matchesSubject = subject === 'all' || cardSubject === subject;
+                
+                card.style.display = (matchesSearch && matchesSubject) ? 'flex' : 'none';
+            });
+        }
+
         window.onload = buildLab;
     </script>
-    
-    <script src="notes.js"></script>
-    <script src="videos.js"></script>
-    <script src="sims.js"></script>
 </body>
 </html>
