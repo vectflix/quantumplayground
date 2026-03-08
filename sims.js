@@ -1,6 +1,6 @@
 window.SIMS_DATA = [
     // Physics Sims
-    { url: "https://phet.colorado.edu/sims/html/moving-man/latest/moving-man_all.html" },
+    { url: "https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_all.html" }, // Replaces Moving Man
     { url: "https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_all.html" },
     { url: "https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_all.html" },
     { url: "https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_all.html" },
@@ -24,7 +24,7 @@ window.SIMS_DATA = [
     // Biology Sims
     { url: "https://phet.colorado.edu/sims/html/membrane-channels/latest/membrane-channels_all.html" },
     { url: "https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_all.html" },
-    { url: "https://phet.colorado.edu/sims/html/cell-respiration/latest/cell-respiration_all.html" },
+    { url: "https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_all.html" }, // Replaces Cell Respiration
     { url: "https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_all.html" },
     { url: "https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_all.html" },
     { url: "https://phet.colorado.edu/sims/html/gene-expression-basics/latest/gene-expression-basics_all.html" },
