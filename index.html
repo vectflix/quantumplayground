@@ -291,6 +291,61 @@
                 <button class="ans-btn" onclick="alert('That is about energy conservation!')">1st Law</button>
             </div>
         </article>
+        <article class="note-card phys">
+            <div class="badge">PHYSICS • QUANTUM</div>
+            <h3>28. The Photoelectric Effect</h3>
+            <p>Evidence that light behaves as a particle (photon). When light hits a metal, it ejects electrons.</p>
+            
+            
+
+[Image of the photoelectric effect diagram]
+
+
+            <div class="equation-block">
+                <p>Photon Energy: $$E = hf$$</p>
+                <p>Kinetic Energy max: $$K_{max} = hf - \Phi$$</p>
+            </div>
+
+            <div class="sim-container">
+                <p class="sim-label">⚡ Live Lab: Photoelectric Simulation</p>
+                <iframe src="https://phet.colorado.edu/sims/html/photoelectric-effect/latest/photoelectric-effect_all.html" class="phet-sim" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <p>If you increase the <strong>intensity</strong> (brightness) of light, what happens to the ejected electrons?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(40, 'Correct! More photons = more electrons, but same energy.')">More electrons are ejected</button>
+                <button class="ans-btn" onclick="alert('Energy only changes with Frequency/Color!')">They move faster</button>
+            </div>
+        </article>
+
+        <article class="note-card phys">
+            <div class="badge">PHYSICS • NUCLEAR</div>
+            <h3>29. Nuclear Decay & Half-Life</h3>
+            <p>The spontaneous breakdown of an atomic nucleus resulting in the release of energy and matter.</p>
+            
+            
+
+[Image of alpha beta and gamma radiation penetration]
+
+
+            <div class="equation-block">
+                <p>Decay Law: $$N(t) = N_0 e^{-\lambda t}$$</p>
+                <p>Half-Life: $$T_{1/2} = \frac{\ln(2)}{\lambda}$$</p>
+            </div>
+
+            <div class="sim-container">
+                <p class="sim-label">☢️ Live Lab: Build an Atom / Isotopes</p>
+                <iframe src="https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_all.html" class="phet-sim" allowfullscreen></iframe>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/KWAsz59F8gA" title="Nuclear Physics" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <p>After 3 half-lives, how much of the original sample remains?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(40, 'Math: 1/2 -> 1/4 -> 1/8. Correct!')">1/8 (12.5%)</button>
+                <button class="ans-btn" onclick="alert('Half of 1/4 is 1/8!')">1/6 (16.6%)</button>
+            </div>
+        </article>
         <article class="note-card chem">
             <div class="badge">CHEMISTRY • ATOMIC</div>
             <h3>10. Atomic Structure & Isotopes</h3>
