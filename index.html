@@ -3,222 +3,712 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Quantum Playground | 2026 Edition</title>
+    <title>Quantum Playground | Academic Suite</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 
     <script>
-        /** * GLOBAL LOGIC ENGINE 
-         * Handles local persistence, XP, and Mobile UI
-         */
-        const QuantumApp = {
+        const QuantumEngine = {
             init() {
-                const session = localStorage.getItem('qp_user');
+                const session = localStorage.getItem('qp_data');
                 if (!session) {
-                    window.addEventListener('load', () => document.getElementById('loginOverlay').style.display = 'flex');
+                    window.addEventListener('load', () => {
+                        document.getElementById('gatekeeper').style.display = 'flex';
+                    });
                 } else {
-                    window.addEventListener('load', () => this.sync(JSON.parse(session)));
+                    window.addEventListener('load', () => this.refreshUI(JSON.parse(session)));
                 }
             },
-            login() {
-                const name = document.getElementById('uIn').value;
-                if (name.length < 2) return alert("Enter a valid name");
-                const user = { name: name, xp: 0, lvl: 1, completed: [] };
-                localStorage.setItem('qp_user', JSON.stringify(user));
+            signIn() {
+                const name = document.getElementById('nickName').value;
+                if(name.length < 2) return alert("Please enter a valid name.");
+                const user = { name: name, xp: 0, level: 1 };
+                localStorage.setItem('qp_data', JSON.stringify(user));
                 location.reload();
             },
-            addXP(pts, msg) {
-                let user = JSON.parse(localStorage.getItem('qp_user'));
-                user.xp += pts;
-                user.lvl = Math.floor(user.xp / 100) + 1;
-                localStorage.setItem('qp_user', JSON.stringify(user));
-                this.sync(user, msg);
+            updateXP(amount, message) {
+                let user = JSON.parse(localStorage.getItem('qp_data'));
+                user.xp += amount;
+                user.level = Math.floor(user.xp / 100) + 1;
+                localStorage.setItem('qp_data', JSON.stringify(user));
+                this.refreshUI(user, message);
             },
-            sync(user, msg) {
-                document.getElementById('uName').innerText = user.name;
-                document.getElementById('uLvl').innerText = `Lvl ${user.lvl}`;
-                document.getElementById('xpFill').style.width = (user.xp % 100) + "%";
-                if (msg) document.getElementById('qText').innerText = msg;
+            refreshUI(user, msg) {
+                document.getElementById('u_name').innerText = user.name;
+                document.getElementById('u_lvl').innerText = "Level " + user.level;
+                document.getElementById('xp_bar').style.width = (user.xp % 100) + "%";
+                if(msg) document.getElementById('guide_speech').innerText = msg;
             }
         };
-        QuantumApp.init();
+        QuantumEngine.init();
 
-        function filter(type) {
-            const cards = document.querySelectorAll('.note-card');
-            cards.forEach(c => c.style.display = (type === 'all' || c.classList.contains(type)) ? 'flex' : 'none');
+        function search() {
+            let q = document.getElementById('searchBox').value.toLowerCase();
+            let cards = document.querySelectorAll('.note-card');
+            cards.forEach(c => c.style.display = c.innerText.toLowerCase().includes(q) ? 'flex' : 'none');
         }
     </script>
 </head>
 <body>
 
-    <div id="loginOverlay" class="login-overlay" style="display:none;">
-        <div class="login-box">
-            <div class="login-icon">⚛️</div>
-            <h2>Quantum Playground</h2>
-            <input type="text" id="uIn" placeholder="Scientist Name...">
-            <button onclick="QuantumApp.login()">Initialize</button>
+    <div id="gatekeeper" class="login-overlay" style="display:none;">
+        <div class="login-modal">
+            <div class="brand-icon">⚛️</div>
+            <h1>Initialize Lab</h1>
+            <p>Enter your scientist name to track progress.</p>
+            <input type="text" id="nickName" placeholder="Name..." autocomplete="off">
+            <button onclick="QuantumEngine.signIn()">Start Session</button>
         </div>
     </div>
 
-    <div class="quark-guide">
-        <div class="quark-bubble" id="qText">Select a module to begin, Scientist!</div>
-        <div class="quark-avatar">⚛️</div>
+    <div class="quark-floater">
+        <div class="speech-bubble" id="guide_speech">Welcome back! Which reality shall we study today?</div>
+        <div class="avatar">⚛️</div>
     </div>
 
-    <header class="main-header">
-        <div class="user-profile">
-            <div class="profile-meta">
-                <span id="uName">Guest</span>
-                <span id="uLvl" class="lvl-badge">Lvl 1</span>
+    <header class="glass-header">
+        <div class="profile-strip">
+            <div class="user-info">
+                <span id="u_name">Scholar</span>
+                <span id="u_lvl" class="lvl-tag">Level 1</span>
             </div>
-            <div class="xp-track"><div id="xpFill" class="xp-fill"></div></div>
+            <div class="progress-outer"><div id="xp_bar" class="progress-inner"></div></div>
         </div>
-        <h1 class="brand">Quantum<span>Playground</span></h1>
+        <div class="main-title">Quantum<span>Playground</span></div>
     </header>
 
-    <nav class="controls">
-        <div class="filter-tabs">
-            <button class="tab-btn active" onclick="filter('all')">All Modules</button>
-            <button class="tab-btn" onclick="filter('phys')">Physics</button>
-            <button class="tab-btn" onclick="filter('chem')">Chemistry</button>
-            <button class="tab-btn" onclick="filter('bio')">Biology</button>
+    <nav class="nav-hub">
+        <div class="search-wrap">
+            <input type="text" id="searchBox" placeholder="Search Physics, Chem, Bio..." onkeyup="search()">
         </div>
     </nav>
 
-    <main class="content-container" id="masterGrid">
+    <main class="grid-layout">
 
-        <article class="note-card phys">
-            <div class="topic-tag">Physics • Mechanics</div>
-            <h3>1. Kinematics & Motion</h3>
-            <p>Mastering the movement of objects in space and time using the Equations of Motion.</p>
+        <article class="note-card">
+            <div class="badge">PHYSICS • MECHANICS</div>
+            <h3>1. Kinematics: The Study of Motion</h3>
+            <p>Understanding displacement, velocity, and acceleration.</p>
             
-            <div class="math-box">
+            
+            
+            <div class="equation-block">
                 $$v = u + at$$
-                $$s = ut + \frac{1}{2}at^2$$
+                $$s = ut + \frac{1;}{2}at^2$$
                 $$v^2 = u^2 + 2as$$
             </div>
-            <iframe class="yt-video" src="https://www.youtube.com/embed/rZ-p-pM8Y_Q" loading="lazy"></iframe>
-            <div class="quiz-box">
-                <p><strong>Evaluation:</strong> What is the displacement if velocity is constant?</p>
-                <button class="quiz-btn" onclick="QuantumApp.addXP(20, 'Correct! $s = vt$')">Velocity × Time</button>
-                <button class="quiz-btn" onclick="alert('Try again!')">Acceleration × Time</button>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/rZ-p-pM8Y_Q" loading="lazy"></iframe>
+
+            <div class="eval-box">
+                <p>What is the final velocity of an object starting from rest accelerating at $3m/s^2$ for 4s?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Correct! $v = 0 + (3*4) = 12$')">12 m/s</button>
+                <button class="ans-btn" onclick="alert('Try again!')">7 m/s</button>
             </div>
         </article>
 
-        <article class="note-card phys">
-            <div class="topic-tag">Physics • Dynamics</div>
+        <article class="note-card">
+            <div class="badge">PHYSICS • DYNAMICS</div>
             <h3>2. Newton's Laws</h3>
             <p>The relationship between motion and the forces acting upon a body.</p>
             
-            <div class="math-box">
+            
+
+[Image of Newton's second law F equals m a]
+
+
+            <div class="equation-block">
                 $$F = ma$$
                 $$p = mv$$
             </div>
-            <iframe class="yt-video" src="https://www.youtube.com/embed/kKKM8Y-u7ds" loading="lazy"></iframe>
-            <div class="sim-box">
-                <iframe src="https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_all.html" class="phet-sim"></iframe>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/kKKM8Y-u7ds" loading="lazy"></iframe>
+
+            <div class="eval-box">
+                <p>Which law explains "Inertia"?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Nice! Objects resist change.')">1st Law</button>
+                <button class="ans-btn" onclick="alert('Wrong law!')">3rd Law</button>
             </div>
-            <div class="quiz-box">
-                <p><strong>Evaluation:</strong> Which law explains why you slide forward when a car brakes?</p>
-                <button class="quiz-btn" onclick="QuantumApp.addXP(20, 'Brilliant! Law of Inertia.')">Newton's 1st Law</button>
-                <button class="quiz-btn" onclick="alert('Not quite!')">Newton's 3rd Law</button>
+        </article>
+
+        <article class="note-card">
+            <div class="badge">PHYSICS • ASTRO</div>
+            <h3>3. Universal Gravitation</h3>
+            <p>How mass attracts mass across the vacuum of space.</p>
+            
+            
+
+            <div class="equation-block">
+                $$F = G\frac{m_1 m_2}{r^2}$$
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/kxkFaBA6qbc" loading="lazy"></iframe>
+
+            <div class="eval-box">
+                <p>If distance doubles, gravity becomes:</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Inverse square law applied!')">1/4 as strong</button>
+                <button class="ans-btn" onclick="alert('Gravity drops fast!')">1/2 as strong</button>
+            </div>
+        </article>
+        <article class="note-card phys">
+            <div class="badge">PHYSICS • ENERGY</div>
+            <h3>4. Work, Energy, and Power</h3>
+            <p>The study of how energy is transferred through force and the rate at which work is done.</p>
+            
+            
+
+            <div class="equation-block">
+                <p>Work Done: $$W = Fd \cos(\theta)$$</p>
+                <p>Kinetic Energy: $$KE = \frac{1}{2}mv^2$$</p>
+                <p>Potential Energy: $$PE = mgh$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/2WCT0W8Ljdg" title="Work and Energy" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>If you double the mass of a moving object, its Kinetic Energy:</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(20, 'Correct! KE is directly proportional to mass.')">Doubles</button>
+                <button class="ans-btn" onclick="alert('Remember: KE = 0.5 * m * v²')">Quadruples</button>
             </div>
         </article>
 
         <article class="note-card phys">
-            <div class="topic-tag">Physics • Energy</div>
-            <h3>3. Work, Energy, & Power</h3>
-            <p>The capacity to do work and the rate at which it is performed.</p>
-            <div class="math-box">
-                $$W = F \cdot d \cdot \cos(\theta)$$
-                $$KE = \frac{1}{2}mv^2$$
-                $$PE = mgh$$
-            </div>
+            <div class="badge">PHYSICS • WAVES</div>
+            <h3>5. Wave Mechanics & Sound</h3>
+            <p>Exploring how energy travels through mediums via longitudinal and transverse waves.</p>
+
             
-            <iframe class="yt-video" src="https://www.youtube.com/embed/2WCT0W8Ljdg" loading="lazy"></iframe>
-            <div class="quiz-box">
-                <p><strong>Evaluation:</strong> If you double the velocity, what happens to Kinetic Energy?</p>
-                <button class="quiz-btn" onclick="QuantumApp.addXP(20, 'Correct! It increases by 4x.')">It Quadruples</button>
-                <button class="quiz-btn" onclick="alert('Remember the square in the formula!')">It Doubles</button>
+
+            <div class="equation-block">
+                <p>Wave Speed: $$v = f\lambda$$</p>
+                <p>Period: $$T = \frac{1}{f}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/TfYCnOvNnFU" title="Waves" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>What happens to the wavelength if the frequency of a wave doubles (speed stays constant)?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(20, 'Correct! Frequency and wavelength are inversely proportional.')">It is halved</button>
+                <button class="ans-btn" onclick="alert('v = f * lambda. If f goes up, lambda must go down.')">It doubles</button>
+            </div>
+        </article>
+
+        <article class="note-card phys">
+            <div class="badge">PHYSICS • OPTICS</div>
+            <h3>6. Optics: Reflection & Refraction</h3>
+            <p>How light behaves when it strikes boundaries or passes through different media.</p>
+
+            
+
+            <div class="equation-block">
+                <p>Snell's Law: $$n_1 \sin(\theta_1) = n_2 \sin(\theta_2)$$</p>
+                <p>Mirror Equation: $$\frac{1}{f} = \frac{1}{d_o} + \frac{1}{d_i}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/95V8ko59p40" title="Optics" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>What is the 'index of refraction' for a vacuum?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Perfect! Light travels at its max speed (c) in a vacuum.')">1.0</button>
+                <button class="ans-btn" onclick="alert('Indices of refraction are always 1.0 or higher!')">0.5</button>
+            </div>
+        </article>
+        <article class="note-card phys">
+            <div class="badge">PHYSICS • ELECTRICITY</div>
+            <h3>7. Electricity & Ohm's Law</h3>
+            <p>The study of electric charges at rest and in motion through conductive circuits.</p>
+
+            
+
+[Image of a basic series and parallel circuit diagram]
+
+
+            <div class="equation-block">
+                <p>Ohm's Law: $$V = IR$$</p>
+                <p>Electric Power: $$P = IV = I^2R$$</p>
+                <p>Coulomb's Law: $$F = k\frac{q_1 q_2}{r^2}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/mc979OhitAg" title="Electricity" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>If you have a 12V battery and a 3Ω resistor, what is the current?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Correct! I = V/R = 12/3 = 4A')">4 Amperes</button>
+                <button class="ans-btn" onclick="alert('Use I = V / R')">36 Amperes</button>
+            </div>
+        </article>
+
+        <article class="note-card phys">
+            <div class="badge">PHYSICS • MAGNETISM</div>
+            <h3>8. Electromagnetism</h3>
+            <p>How electric currents produce magnetic fields and how moving magnets create electricity.</p>
+
+            
+
+[Image of the right hand rule for magnetic fields]
+
+
+            <div class="equation-block">
+                <p>Magnetic Force: $$F = qvB \sin(\theta)$$</p>
+                <p>Magnetic Flux: $$\Phi = BA \cos(\theta)$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/cy6kba3A8vM" title="Magnetism" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>Which rule is used to find the direction of a magnetic field around a wire?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Right on! The Right-Hand Rule.')">Right-Hand Rule</button>
+                <button class="ans-btn" onclick="alert('Try the other hand!')">Left-Hand Rule</button>
+            </div>
+        </article>
+
+        <article class="note-card phys">
+            <div class="badge">PHYSICS • THERMO</div>
+            <h3>9. Thermodynamics & Entropy</h3>
+            <p>The laws governing heat, work, and the transformation of energy within a system.</p>
+
+            
+
+[Image of the four laws of thermodynamics]
+
+
+            <div class="equation-block">
+                <p>First Law: $$\Delta U = Q - W$$</p>
+                <p>Ideal Gas Law: $$PV = nRT$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/4i1_97_Z4P8" title="Thermodynamics" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>Which law states that absolute zero temperature can never be reached?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(30, 'Correct! The Third Law of Thermodynamics.')">3rd Law</button>
+                <button class="ans-btn" onclick="alert('That is about energy conservation!')">1st Law</button>
             </div>
         </article>
         <article class="note-card chem">
-            <div class="topic-tag">Chemistry • Atoms</div>
-            <h3>4. Atomic Structure & Theory</h3>
-            <p>Exploring the building blocks of matter: Protons, Neutrons, and Electrons.</p>
+            <div class="badge">CHEMISTRY • ATOMIC</div>
+            <h3>10. Atomic Structure & Isotopes</h3>
+            <p>Exploring protons, neutrons, and electrons, and how their arrangement defines the identity of matter.</p>
+
             
 
 [Image of the structure of an atom]
 
-            <div class="math-box">
-                <p>Mass Number ($A$) = $Z + N$</p>
-                <p>Where $Z$ is Atomic Number and $N$ is Neutrons.</p>
+
+            <div class="equation-block">
+                <p>Mass Number: $$A = Z + N$$</p>
+                <p>Atomic Weight: $$\sum (\text{Isotope Mass} \times \text{Abundance})$$</p>
             </div>
-            <iframe class="yt-video" src="https://www.youtube.com/embed/h6LPAwA938Y" loading="lazy"></iframe>
-            <div class="sim-box">
-                <iframe src="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_all.html" class="phet-sim"></iframe>
-            </div>
-            <div class="quiz-box">
-                <p><strong>Evaluation:</strong> What particle determines the identity of an element?</p>
-                <button class="quiz-btn" onclick="QuantumApp.addXP(25, 'Correct! The Proton is the ID card.')">Proton</button>
-                <button class="quiz-btn" onclick="alert('Electrons can change in ions!')">Electron</button>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/h6LPAwA938Y" title="Atomic Structure" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>If an atom has 6 protons and 8 neutrons, what is its mass number?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Correct! 6 + 8 = 14 (Carbon-14)')">14</button>
+                <button class="ans-btn" onclick="alert('Add Protons + Neutrons!')">6</button>
             </div>
         </article>
 
         <article class="note-card chem">
-            <div class="topic-tag">Chemistry • Periodicity</div>
-            <h3>5. Periodic Trends</h3>
-            <p>Understanding Electronegativity, Ionization Energy, and Atomic Radius.</p>
+            <div class="badge">CHEMISTRY • PERIODICITY</div>
+            <h3>11. Periodic Table Trends</h3>
+            <p>The systematic patterns in element properties, including atomic radius, electronegativity, and ionization energy.</p>
+
             
 
 [Image of the periodic table trends]
 
-            <div class="math-box">
-                <p>Effective Nuclear Charge ($Z_{eff}$) = $Z - S$</p>
+
+            <div class="equation-block">
+                <p>Electronegativity: $$\chi \text{ (Pauling Scale)}$$</p>
+                <p>Ionization Energy: $$X_{(g)} + IE \rightarrow X^+_{(g)} + e^-$$</p>
             </div>
-            <iframe class="yt-video" src="https://www.youtube.com/embed/0RRVV4Diomg" loading="lazy"></iframe>
-            <div class="quiz-box">
-                <p><strong>Evaluation:</strong> Which way does Electronegativity increase?</p>
-                <button class="quiz-btn" onclick="QuantumApp.addXP(25, 'Up and to the Right is correct!')">Up and Right</button>
-                <button class="quiz-btn" onclick="alert('Check the trend for Fluorine!')">Down and Left</button>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/0RRVV4Diomg" title="Periodic Trends" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>Which element is the most electronegative on the periodic table?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Correct! Fluorine is the ultimate electron-seeker.')">Fluorine</button>
+                <button class="ans-btn" onclick="alert('Cesium is the least!')">Cesium</button>
             </div>
         </article>
 
         <article class="note-card chem">
-            <div class="topic-tag">Chemistry • Bonding</div>
-            <h3>6. Ionic & Covalent Bonds</h3>
-            <p>How atoms share or steal electrons to reach the stable Octet state.</p>
+            <div class="badge">CHEMISTRY • QUANTUM</div>
+            <h3>12. Electron Configuration</h3>
+            <p>Using quantum numbers to map the "addresses" of electrons in s, p, d, and f orbitals.</p>
+
             
-            <div class="math-box">
-                <p>$\Delta EN > 1.7 \rightarrow$ Ionic Bond</p>
-                <p>$\Delta EN < 1.7 \rightarrow$ Covalent Bond</p>
+
+            <div class="equation-block">
+                <p>Principal Quantum Number: $$n = 1, 2, 3...$$</p>
+                <p>Pauli Exclusion Principle: $$\text{No 2 electrons have same 4 quantum numbers.}$$</p>
             </div>
-            <iframe class="yt-video" src="https://www.youtube.com/embed/Sk7W2Vgb6yY" loading="lazy"></iframe>
-            <div class="sim-box">
-                <iframe src="https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_all.html" class="phet-sim"></iframe>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/2vIuE_RpxnI" title="Electron Configuration" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>What is the maximum number of electrons the 's' subshell can hold?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Perfect! 1 orbital = 2 electrons.')">2</button>
+                <button class="ans-btn" onclick="alert('6 is for the p-subshell!')">6</button>
             </div>
-            <div class="quiz-box">
-                <p><strong>Evaluation:</strong> What type of bond involves "sharing" electrons?</p>
-                <button class="quiz-btn" onclick="QuantumApp.addXP(25, 'Perfect! Covalent = Co-sharing.')">Covalent</button>
-                <button class="quiz-btn" onclick="alert('Ionic is a full transfer!')">Ionic</button>
+        </article>
+        <article class="note-card chem">
+            <div class="badge">CHEMISTRY • BONDS</div>
+            <h3>13. Chemical Bonding</h3>
+            <p>The forces of attraction that bind atoms together. Includes the transfer of electrons (Ionic) and the sharing of electrons (Covalent).</p>
+
+            
+
+            <div class="equation-block">
+                <p>Lattice Energy: $$U = k\frac{Q_1 Q_2}{r}$$</p>
+                <p>Bond Order: $$\frac{\text{Shared Pairs}}{\text{Bonded Atom Pairs}}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/Sk7W2Vgb6yY" title="Chemical Bonding" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>What type of bond is formed between two non-metals sharing electrons?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Correct! Covalent bonds involve sharing.')">Covalent</button>
+                <button class="ans-btn" onclick="alert('Ionic is usually Metal + Non-metal!')">Ionic</button>
             </div>
         </article>
 
         <article class="note-card chem">
-            <div class="topic-tag">Chemistry • Stoichiometry</div>
-            <h3>7. Moles & Reaction Math</h3>
-            <p>Quantifying chemical reactions using Avogadro's Number.</p>
-            <div class="math-box">
-                <p>1 Mole = $6.022 \times 10^{23}$ particles</p>
-                <p>$n = \frac{m}{M}$</p>
+            <div class="badge">CHEMISTRY • STRUCTURE</div>
+            <h3>14. VSEPR Theory</h3>
+            <p>Valence Shell Electron Pair Repulsion theory predicts the 3D shape of molecules based on electron repulsion.</p>
+
+            
+
+            <div class="equation-block">
+                <p>Linear: $$180^\circ$$</p>
+                <p>Trigonal Planar: $$120^\circ$$</p>
+                <p>Tetrahedral: $$109.5^\circ$$</p>
             </div>
-            <iframe class="yt-video" src="https://www.youtube.com/embed/74S7X8Y-Z_M" loading="lazy"></iframe>
-            <div class="quiz-box">
-                <p><strong>Evaluation:</strong> How many moles are in 18g of Water ($H_2O$)?</p>
-                <button class="quiz-btn" onclick="QuantumApp.addXP(30, 'Nice! Molar mass of water is 18.')">1 Mole</button>
-                <button class="quiz-btn" onclick="alert('Divide mass by molar mass!')">2 Moles</button>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/nxebQZUVvTg" title="VSEPR Theory" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>What is the molecular shape of Water ($H_2O$)?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(30, 'Correct! Due to lone pairs, it is Bent.')">Bent</button>
+                <button class="ans-btn" onclick="alert('Lone pairs push the hydrogens down!')">Linear</button>
             </div>
         </article>
-        </main>
+
+        <article class="note-card chem">
+            <div class="badge">CHEMISTRY • FORCES</div>
+            <h3>15. Intermolecular Forces</h3>
+            <p>Forces that exist between molecules, determining physical properties like boiling point and surface tension.</p>
+
+            
+
+[Image of types of intermolecular forces]
+
+
+            <div class="equation-block">
+                <p>Forces: $$\text{Hydrogen Bonding} > \text{Dipole-Dipole} > \text{London Dispersion}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/S8QsLUO_tgQ" title="Intermolecular Forces" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>Which force is responsible for the high boiling point of water?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Spot on! Hydrogen bonding is very strong.')">Hydrogen Bonding</button>
+                <button class="ans-btn" onclick="alert('Dispersion is the weakest force!')">London Dispersion</button>
+            </div>
+        </article>
+        <article class="note-card chem">
+            <div class="badge">CHEMISTRY • QUANTITATIVE</div>
+            <h3>16. Stoichiometry: Chemical Math</h3>
+            <p>Using the mole concept to calculate the masses of reactants and products in a balanced chemical equation.</p>
+
+            
+
+            <div class="equation-block">
+                <p>The Mole: $$1 \text{ mol} = 6.022 \times 10^{23} \text{ particles}$$</p>
+                <p>Molar Mass: $$n = \frac{m}{M}$$</p>
+                <p>Ideal Gas Volume: $$22.4 \text{ L at STP}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/UL1jmJaUkaQ" title="Stoichiometry" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>How many moles are in 36 grams of Water ($H_2O$)? (Molar mass $\approx 18\text{g/mol}$)</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(30, 'Perfect! 36 / 18 = 2 moles.')">2 Moles</button>
+                <button class="ans-btn" onclick="alert('Divide given mass by molar mass!')">1 Mole</button>
+            </div>
+        </article>
+
+        <article class="note-card chem">
+            <div class="badge">CHEMISTRY • KINETICS</div>
+            <h3>17. Reaction Rates</h3>
+            <p>The study of how fast reactions occur and the factors (temperature, catalysts, concentration) that influence them.</p>
+
+            
+
+[Image of a reaction coordinate diagram showing activation energy with and without a catalyst]
+
+
+            <div class="equation-block">
+                <p>Rate Law: $$\text{Rate} = k[A]^m[B]^n$$</p>
+                <p>Arrhenius Equation: $$k = Ae^{-\frac{E_a}{RT}}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/7qOFtL3VEBc" title="Chemical Kinetics" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>How does a catalyst increase the rate of a reaction?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Correct! It lowers the energy barrier.')">Lowers Activation Energy</button>
+                <button class="ans-btn" onclick="alert('Catalysts don\'t change the temperature!')">Increases Temperature</button>
+            </div>
+        </article>
+
+        <article class="note-card chem">
+            <div class="badge">CHEMISTRY • EQUILIBRIUM</div>
+            <h3>18. Dynamic Equilibrium</h3>
+            <p>The state where the forward and reverse reaction rates are equal, and concentrations remain constant.</p>
+
+            
+
+            <div class="equation-block">
+                <p>Equilibrium Constant: $$K_c = \frac{[C]^c[D]^d}{[A]^a[B]^b}$$</p>
+                <p>Gibbs Free Energy: $$\Delta G = \Delta G^\circ + RT \ln Q$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/g5wNg_dKsYY" title="Chemical Equilibrium" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>If you increase the concentration of a reactant, which way does the equilibrium shift?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(30, 'Right! Le Chatelier’s Principle in action.')">Toward Products (Right)</button>
+                <button class="ans-btn" onclick="alert('It shifts to use up the added reactant!')">Toward Reactants (Left)</button>
+            </div>
+        </article>
+        <article class="note-card bio">
+            <div class="badge">BIOLOGY • CYTOLOGY</div>
+            <h3>19. The Living Cell</h3>
+            <p>The cell is the smallest unit of life. We distinguish between simple Prokaryotes and complex Eukaryotes containing specialized organelles.</p>
+
+            
+
+[Image of a diagram of an animal cell with labeled organelles]
+
+
+            <div class="equation-block">
+                <p>Surface Area to Volume Ratio: $$\frac{6s^2}{s^3} = \frac{6}{s}$$</p>
+                <p><em>(Why cells must remain small to function)</em></p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/URUJD5NEXC8" title="Cell Structure" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>Which organelle is known as the 'Powerhouse' because it generates ATP?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Correct! The Mitochondria produces energy.')">Mitochondria</button>
+                <button class="ans-btn" onclick="alert('The Nucleus holds the DNA!')">Nucleus</button>
+            </div>
+        </article>
+
+        <article class="note-card bio">
+            <div class="badge">BIOLOGY • MEMBRANES</div>
+            <h3>20. The Fluid Mosaic Model</h3>
+            <p>How the semi-permeable phospholipid bilayer regulates the movement of substances in and out of the cell.</p>
+
+            
+
+[Image of the phospholipid bilayer and membrane proteins]
+
+
+            <div class="equation-block">
+                <p>Osmotic Pressure: $$\Pi = iMRT$$</p>
+                <p>Diffusion Rate: $$J = -D \frac{dc}{dx}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/Ptmlvtei8hw" title="Cell Membranes" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>Which process requires ATP to move molecules against their concentration gradient?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Exactly! Active Transport requires energy.')">Active Transport</button>
+                <button class="ans-btn" onclick="alert('Facilitated diffusion is passive!')">Facilitated Diffusion</button>
+            </div>
+        </article>
+
+        <article class="note-card bio">
+            <div class="badge">BIOLOGY • BIOENERGETICS</div>
+            <h3>21. Cellular Respiration</h3>
+            <p>The process by which cells break down glucose to produce ATP, involving Glycolysis, the Krebs Cycle, and the ETC.</p>
+
+            
+
+            <div class="equation-block">
+                <p>Overall Reaction: $$C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{ATP}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/eJ9Zjc-jdys" title="Cellular Respiration" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>Where in the cell does Glycolysis take place?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(30, 'Correct! It happens in the Cytoplasm.')">Cytoplasm</button>
+                <button class="ans-btn" onclick="alert('The Krebs cycle happens there, but not Glycolysis!')">Mitochondrial Matrix</button>
+            </div>
+        </article>
+        <article class="note-card bio">
+            <div class="badge">BIOLOGY • GENETICS</div>
+            <h3>22. DNA: The Blueprint of Life</h3>
+            <p>The double helix structure of DNA and how it unzip and copies itself with incredible precision during the S-phase of the cell cycle.</p>
+
+            
+
+            <div class="equation-block">
+                <p>Chargaff's Rule: $$[A] = [T] \text{ and } [C] = [G]$$</p>
+                <p>Replication Direction: $$5' \rightarrow 3' \text{ direction}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/5qSrmeiWsuc" title="DNA Replication" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>If a DNA strand has 20% Adenine, what percentage of Cytosine does it have?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(30, 'Correct! A=20, T=20 (Total 40). Remaining 60 is C+G, so C=30%')">30%</button>
+                <button class="ans-btn" onclick="alert('Remember: A+T+C+G = 100%')">20%</button>
+            </div>
+        </article>
+
+        <article class="note-card bio">
+            <div class="badge">BIOLOGY • MOLECULAR</div>
+            <h3>23. Protein Synthesis</h3>
+            <p>The Central Dogma: How DNA is transcribed into mRNA in the nucleus and then translated into a polypeptide chain by ribosomes.</p>
+
+            
+
+[Image of the process of transcription and translation in a cell]
+
+
+            <div class="equation-block">
+                <p>Codon: $$\text{3 Nucleotides} = 1 \text{ Amino Acid}$$</p>
+                <p>Start Codon: $$\text{AUG (Methionine)}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/gG7uCskUOrA" title="Protein Synthesis" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>Which molecule carries the specific amino acid to the ribosome during translation?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Correct! tRNA acts as the molecular bridge.')">tRNA</button>
+                <button class="ans-btn" onclick="alert('mRNA carries the message, but not the amino acid!')">mRNA</button>
+            </div>
+        </article>
+
+        <article class="note-card bio">
+            <div class="badge">BIOLOGY • HEREDITY</div>
+            <h3>24. Laws of Inheritance</h3>
+            <p>Gregor Mendel's principles of segregation and independent assortment using Punnett squares to predict offspring traits.</p>
+
+            
+
+            <div class="equation-block">
+                <p>Phenotypic Ratio (Aa x Aa): $$3:1$$</p>
+                <p>Genotypic Ratio (Aa x Aa): $$1:2:1$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/Mehz7tCxjSE" title="Mendelian Genetics" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>If you cross two heterozygous (Aa) plants, what is the chance of a recessive (aa) offspring?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Perfect! 1 out of 4 squares.')">25%</button>
+                <button class="ans-btn" onclick="alert('Check the Punnett square: AA, Aa, Aa, aa')">50%</button>
+            </div>
+        </article>
+        <article class="note-card bio">
+            <div class="badge">BIOLOGY • EVOLUTION</div>
+            <h3>25. Theory of Evolution</h3>
+            <p>How populations change over time through natural selection, genetic drift, and gene flow. Survival of the fittest in changing environments.</p>
+
+            
+
+            <div class="equation-block">
+                <p>Hardy-Weinberg Equilibrium:</p>
+                <p>$$p^2 + 2pq + q^2 = 1$$</p>
+                <p>$$p + q = 1$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/hOfRN0KihOU" title="Evolution" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>What is the primary source of new genetic variation in a population?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(30, 'Correct! Mutations create new alleles.')">Mutation</button>
+                <button class="ans-btn" onclick="alert('Selection filters variation, it doesn\'t create it!')">Natural Selection</button>
+            </div>
+        </article>
+
+        <article class="note-card bio">
+            <div class="badge">BIOLOGY • ECOLOGY</div>
+            <h3>26. Ecosystems & Food Webs</h3>
+            <p>The study of interactions between organisms and their environment, following the flow of energy from producers to apex predators.</p>
+
+            
+
+[Image of an energy pyramid showing the 10 percent rule]
+
+
+            <div class="equation-block">
+                <p>The 10% Rule:</p>
+                <p>$$\text{Energy}_{\text{next level}} = \text{Energy}_{\text{current}} \times 0.10$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/hLq2datPo5M" title="Ecology" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>In a food chain, which group always occupies the first trophic level?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(25, 'Correct! Producers (Autotrophs) start the chain.')">Producers</button>
+                <button class="ans-btn" onclick="alert('Herbivores are the second level!')">Herbivores</button>
+            </div>
+        </article>
+
+        <article class="note-card bio">
+            <div class="badge">BIOLOGY • ANATOMY</div>
+            <h3>27. Homeostasis & Body Systems</h3>
+            <p>How the nervous, circulatory, and respiratory systems work together to maintain a stable internal environment (Homeostasis).</p>
+
+            
+
+            <div class="equation-block">
+                <p>Cardiac Output: $$CO = \text{Heart Rate} \times \text{Stroke Volume}$$</p>
+            </div>
+
+            <iframe class="video-frame" src="https://www.youtube.com/embed/X9ovR89f660" title="Body Systems" allowfullscreen></iframe>
+
+            <div class="eval-box">
+                <h4>Quantum Quiz</h4>
+                <p>Which system is responsible for transporting oxygen and nutrients to cells?</p>
+                <button class="ans-btn" onclick="QuantumEngine.updateXP(30, 'Perfect! The Circulatory system is the body\'s highway.')">Circulatory System</button>
+                <button class="ans-btn" onclick="alert('The Respiratory system gets the oxygen, but Circulatory moves it!')">Respiratory System</button>
+            </div>
+        </article>
+
+    </main> <footer style="text-align: center; padding: 40px; opacity: 0.5; font-size: 0.8rem;">
+        <p>&copy; 2026 Quantum Playground Academic Suite | Stay Curious.</p>
+    </footer>
+
 </body>
 </html>
