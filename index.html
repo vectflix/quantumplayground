@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantum Playground | 2026 Academic Suite</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -13,14 +14,14 @@
     <div id="particle-container"></div>
 
     <div id="login-gate" class="login-overlay">
-        <div class="glass-box">
+        <div class="glass-box main-entrance">
             <div class="brand-logo">⚛️</div>
             <h1>Quantum<span>Playground</span></h1>
-            <p>2026 Research Terminal</p>
+            <p class="subtitle">2026 Research Terminal</p>
             <div class="input-group">
                 <input type="text" id="username" placeholder="Enter Scientist Name..." autocomplete="off">
             </div>
-            <button onclick="initSession()" class="start-btn">Access Lab</button>
+            <button onclick="initSession()" class="start-btn">Initialize Access</button>
             <p class="dev-tag-mini">Developed by Malcom & Yens</p>
         </div>
     </div>
@@ -36,9 +37,11 @@
                     </div>
                 </div>
                 <div class="controls">
-                    <input type="text" id="searchBar" placeholder="Search topics..." onkeyup="filterContent()">
+                    <div class="search-wrapper">
+                        <input type="text" id="searchBar" placeholder="Search modules..." onkeyup="filterContent()">
+                    </div>
                     <select id="subjectFilter" onchange="filterContent()">
-                        <option value="all">All Subjects</option>
+                        <option value="all">All Disciplines</option>
                         <option value="physics">Physics</option>
                         <option value="chemistry">Chemistry</option>
                         <option value="biology">Biology</option>
@@ -47,14 +50,13 @@
             </div>
         </header>
 
-        <main id="content-grid" class="grid-layout">
-            </main>
+        <main id="content-grid" class="grid-layout"></main>
 
         <footer class="quantum-footer">
             <div class="footer-content">
                 <div class="footer-section main-credit">
                     <h4>Quantum<span>Playground</span></h4>
-                    <p class="creator-badge">Core Engineers: <strong>Malcom & Yens</strong></p>
+                    <div class="creator-badge">Core Engineers: <strong>Malcom & Yens</strong></div>
                     <p>Advanced Visualization Suite v2.1</p>
                 </div>
                 <div class="footer-section">
@@ -66,12 +68,12 @@
                     <h4>Navigation</h4>
                     <div class="footer-links">
                         <a href="#top">Scroll to Top</a>
-                        <a href="https://phet.colorado.edu/" target="_blank">External Simulations</a>
+                        <a href="https://phet.colorado.edu/" target="_blank">PhET Resources</a>
                     </div>
                 </div>
                 <div class="footer-section system-tag">
                     <h4>System Info</h4>
-                    <p>Encryption: Active</p>
+                    <p>Encryption: 256-bit Active</p>
                     <p>&copy; 2026 Malcom & Yens</p>
                 </div>
             </div>
@@ -79,10 +81,8 @@
     </div>
 
     <script>
-        // MASTER DATA SOURCE (Full 27 Modules)
         const DATA = [
-            // PHYSICS
-            { id: 0, subject: "physics", title: "Kinematics & Motion", text: "The study of displacement, velocity, and acceleration.", math: "$$v = u + at$$ $$s = ut + \\frac{1}{2}at^2$$", yt: "rZ-p-pM8Y_Q", sim: "https://phet.colorado.edu/sims/html/moving-man/latest/moving-man_all.html" },
+            { id: 0, subject: "physics", title: "Kinematics & Motion", text: "The study of displacement, velocity, and acceleration.", math: "$$v = u + at$$ $$s = ut + \\frac{1}{2}at^2$$", yt: "rZ-p-pM8Y_Q", sim: "https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_all.html" },
             { id: 1, subject: "physics", title: "Newton's Laws", text: "Dynamics and the relationship between Force and Mass.", math: "$$F = ma$$ $$p = mv$$", yt: "kKKM8Y-u7ds", sim: "https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_all.html" },
             { id: 2, subject: "physics", title: "Work & Energy", text: "Conservation of energy and mechanical work.", math: "$$KE = \\frac{1}{2}mv^2$$ $$PE = mgh$$", yt: "2WCT0W8Ljdg", sim: "https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_all.html" },
             { id: 3, subject: "physics", title: "Gravitation", text: "Planetary motion and universal gravitational force.", math: "$$F = G\\frac{m_1m_2}{r^2}$$", yt: "kxkFaBA6qbc", sim: "https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_all.html" },
@@ -91,8 +91,6 @@
             { id: 6, subject: "physics", title: "Optics", text: "Light behavior, reflection, and refraction.", math: "$$n_1\\sin\\theta_1 = n_2\\sin\\theta_2$$", yt: "95V8ko59p40", sim: "https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_all.html" },
             { id: 7, subject: "physics", title: "Circuits", text: "Ohm's Law and electrical power distribution.", math: "$$V = IR$$ $$P = IV$$", yt: "mc979OhitAg", sim: "https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_all.html" },
             { id: 8, subject: "physics", title: "Quantum Physics", text: "Photon energy and the photoelectric effect.", math: "$$E = hf$$ $$E = mc^2$$", yt: "KWAsz59F8gA", sim: "https://phet.colorado.edu/sims/html/photoelectric-effect/latest/photoelectric-effect_all.html" },
-            
-            // CHEMISTRY
             { id: 9, subject: "chemistry", title: "Atomic Structure", text: "Subatomic particles and atomic mass.", math: "$$A = Z + N$$", yt: "h6LPAwA938Y", sim: "https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_all.html" },
             { id: 10, subject: "chemistry", title: "Periodic Trends", text: "Electronegativity and atomic radius patterns.", math: "$$\\text{Trend: EN } \\uparrow \\to$$", yt: "0RRVV4Diomg", sim: "https://phet.colorado.edu/sims/html/periodic-trends/latest/periodic-trends_all.html" },
             { id: 11, subject: "chemistry", title: "Molecular Shapes", text: "VSEPR theory and 3D molecular geometry.", math: "$$AX_4 = \\text{Tetrahedral}$$", yt: "Sk7W2Vgb6yY", sim: "https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_all.html" },
@@ -102,8 +100,6 @@
             { id: 15, subject: "chemistry", title: "Equilibrium", text: "Dynamic equilibrium and Le Chatelier's Principle.", math: "$$K_c = [P]/[R]$$", yt: "g5wNg_dKsYY", sim: "https://phet.colorado.edu/sims/html/reversible-reactions/latest/reversible-reactions_all.html" },
             { id: 16, subject: "chemistry", title: "Acids & Bases", text: "The pH scale and neutralization reactions.", math: "$$pH = -\\log[H^+]$$", yt: "ANi709MYn60", sim: "https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_all.html" },
             { id: 17, subject: "chemistry", title: "Molarity", text: "Concentration of solutes in solution.", math: "$$M = mol/L$$", yt: "UloIw7d9Hao", sim: "https://phet.colorado.edu/sims/html/molarity/latest/molarity_all.html" },
-
-            // BIOLOGY
             { id: 18, subject: "biology", title: "The Cell", text: "Functions of eukaryotic organelles.", math: "$$\\text{Nucleus: DNA Storage}$$", yt: "URUJD5NEXC8", sim: "https://phet.colorado.edu/sims/html/membrane-channels/latest/membrane-channels_all.html" },
             { id: 19, subject: "biology", title: "Cell Transport", text: "Diffusion, osmosis, and active transport.", math: "$$\\text{ATP Required for Active}$$", yt: "Ptmlvtei8hw", sim: "https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_all.html" },
             { id: 20, subject: "biology", title: "Cell Respiration", text: "Conversion of glucose into ATP energy.", math: "$$C_6H_{12}O_6 + 6O_2 \\to ATP$$", yt: "eJ9Zjc-jdys", sim: "https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_all.html" },
@@ -112,10 +108,9 @@
             { id: 23, subject: "biology", title: "Protein Synthesis", text: "Transcription and translation processes.", math: "$$DNA \\to RNA \\to \\text{Protein}$$", yt: "gG7uCskUOrA", sim: "https://phet.colorado.edu/sims/html/gene-expression-basics/latest/gene-expression-basics_all.html" },
             { id: 24, subject: "biology", title: "Genetics", text: "Mendelian inheritance and Punnett squares.", math: "$$\\text{Ratio: 3:1 (Aa x Aa)}$$", yt: "Mehz7tCxjSE", sim: "https://phet.colorado.edu/sims/html/gene-machine-lac-operon/latest/gene-machine-lac-operon_all.html" },
             { id: 25, subject: "biology", title: "Evolution", text: "Natural selection and adaptation mechanisms.", math: "$$p^2+2pq+q^2=1$$", yt: "hOfRN0KihOU", sim: "https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_all.html" },
-            { id: 26, subject: "biology", title: "Ecology", text: "Food webs and energy transfer in ecosystems.", math: "$$\\text{10% Energy Rule}$$", yt: "hLq2datPo5M", sim: "https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_all.html" }
+            { id: 26, subject: "biology", title: "Ecology", text: "Food webs and energy transfer in ecosystems.", math: "$$\\text{10% Energy Rule}$$", yt: "hLq2datPo5M", sim: "https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_all.html" }
         ];
 
-        // SESSION TIMER
         let startTime;
         function updateTimer() {
             const now = new Date();
@@ -127,7 +122,7 @@
 
         function initSession() {
             const name = document.getElementById('username').value;
-            if (name.length < 2) { alert("Credentials Required."); return; }
+            if (name.length < 2) { return; }
             localStorage.setItem('quantum_user', name);
             showApp(name);
         }
@@ -145,14 +140,18 @@
             const grid = document.getElementById('content-grid');
             grid.innerHTML = DATA.map(topic => `
                 <article class="note-card ${topic.subject}" data-subject="${topic.subject}">
-                    <div class="badge">${topic.subject}</div>
-                    <h3>${topic.title}</h3>
-                    <p>${topic.text}</p>
+                    <div class="card-header">
+                        <div class="badge">${topic.subject}</div>
+                        <h3>${topic.title}</h3>
+                    </div>
+                    <p class="topic-desc">${topic.text}</p>
                     <div class="equation-block">${topic.math}</div>
-                    <iframe class="video-frame" src="https://www.youtube.com/embed/${topic.yt}" allowfullscreen loading="lazy"></iframe>
-                    <div class="sim-box">
-                        <p class="sim-label">🔬 LIVE LAB</p>
-                        <iframe src="${topic.sim}" class="phet-sim" loading="lazy"></iframe>
+                    <div class="media-stack">
+                        <iframe class="video-frame" src="https://www.youtube.com/embed/${topic.yt}" allowfullscreen loading="lazy"></iframe>
+                        <div class="sim-box">
+                            <p class="sim-label">🔬 LIVE LAB TERMINAL</p>
+                            <iframe src="${topic.sim}" class="phet-sim" loading="lazy"></iframe>
+                        </div>
                     </div>
                 </article>
             `).join('');
@@ -170,23 +169,23 @@
             });
         }
 
-        // AUTO-LOGIN CHECK
         window.onload = () => {
             const savedUser = localStorage.getItem('quantum_user');
             if (savedUser) showApp(savedUser);
             createParticles();
         };
 
-        // BACKGROUND PARTICLES EFFECT
         function createParticles() {
             const container = document.getElementById('particle-container');
-            for(let i=0; i<30; i++) {
+            for(let i=0; i<50; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.top = Math.random() * 100 + 'vh';
-                p.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                p.style.opacity = Math.random();
+                p.style.width = (Math.random() * 3 + 1) + 'px';
+                p.style.height = p.style.width;
+                p.style.animationDuration = (Math.random() * 20 + 10) + 's';
+                p.style.opacity = Math.random() * 0.5;
                 container.appendChild(p);
             }
         }
