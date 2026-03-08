@@ -5,18 +5,6 @@
     --bio: #10b981;
     --border: rgba(255,255,255,0.08);
     --glass: rgba(15, 23, 42, 0.7);
-    --accent: #3b82f6;
-}
-
-/* NEON THEME OVERRIDES */
-.neon-theme {
-    --bg: #0d0221;
-    --phys: #ff00ff;
-    --chem: #00f7ff;
-    --bio: #39ff14;
-    --accent: #ff00ff;
-    --glass: rgba(20, 0, 40, 0.85);
-    --border: rgba(255, 0, 255, 0.2);
 }
 
 body {
@@ -24,105 +12,221 @@ body {
     color: #f8fafc;
     font-family: 'Plus Jakarta Sans', sans-serif;
     margin: 0;
-    transition: background 0.5s ease;
+    line-height: 1.6;
 }
 
-/* 1. ANIMATIONS */
-@keyframes cardReveal {
-    from { opacity: 0; transform: translateY(50px) scale(0.9); filter: blur(10px); }
-    to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
-
-@keyframes floatUp {
-    0% { transform: translateY(102vh) scale(0); opacity: 0; }
-    20% { opacity: 0.4; }
-    100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-}
-
-@keyframes pulse {
-    0%, 100% { box-shadow: 0 0 5px var(--accent); }
-    50% { box-shadow: 0 0 20px var(--accent); }
-}
-
-/* 2. LAYOUT */
+/* Background */
 #particle-container {
-    position: fixed; inset: 0; z-index: -1;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
     background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
 }
 
 .particle {
-    position: absolute; background: #fff; border-radius: 50%;
-    animation: floatUp linear infinite; opacity: 0;
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: float linear infinite;
 }
 
+@keyframes float {
+    from { transform: translateY(0) rotate(0deg); }
+    to { transform: translateY(-100vh) rotate(360deg); }
+}
+
+/* Login Gate Styling */
 .login-overlay {
-    position: fixed; inset: 0; z-index: 2000;
-    background: var(--bg); display: flex; justify-content: center; align-items: center;
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
 }
 
-.glass-box {
-    background: var(--glass); padding: 40px; border-radius: 30px;
-    border: 1px solid var(--border); text-align: center; width: 400px;
-    backdrop-filter: blur(20px);
+.main-entrance {
+    max-width: 450px;
+    width: 90%;
+    border: 1px solid var(--phys);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
 }
 
+.brand-logo { font-size: 3rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px var(--phys)); }
+h1 span { font-weight: 300; color: var(--phys); opacity: 0.8; }
+
+.subtitle { color: #94a3b8; font-size: 0.9rem; margin-top: -10px; margin-bottom: 30px; }
+
+input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+input:focus { outline: none; border-color: var(--phys); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+
+.start-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--phys);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.start-btn:hover { transform: scale(1.02); filter: brightness(1.1); }
+
+/* Header Improvements */
 .glass-nav {
     position: sticky; top: 0; z-index: 1000;
-    background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--border); padding: 15px 40px;
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 40px;
 }
 
+.brand h1 { font-size: 1.4rem; margin: 0; }
+#session-timer { 
+    font-size: 0.75rem; 
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.controls { display: flex; gap: 20px; align-items: center; }
+select {
+    background: #0f172a;
+    color: white;
+    padding: 8px 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+/* Grid and Cards */
 .grid-layout {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-    gap: 30px; padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 35px; padding: 50px;
 }
 
-/* 3. CARDS */
 .note-card {
-    background: var(--glass); border-radius: 24px; padding: 25px;
-    border: 1px solid var(--border); opacity: 0;
-    animation: cardReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .note-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    border-color: var(--accent);
+    border-color: rgba(255,255,255,0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 .badge {
-    text-transform: uppercase; font-size: 0.65rem; font-weight: 800;
-    padding: 4px 12px; border-radius: 20px; display: inline-block;
-    margin-bottom: 10px; border: 1px solid currentColor;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
 }
 
-.physics .badge { color: var(--phys); }
-.chemistry .badge { color: var(--chem); }
-.biology .badge { color: var(--bio); }
+.physics .badge { background: rgba(59, 130, 246, 0.15); color: var(--phys); }
+.chemistry .badge { background: rgba(245, 158, 11, 0.15); color: var(--chem); }
+.biology .badge { background: rgba(16, 185, 129, 0.15); color: var(--bio); }
 
-.video-frame, .phet-sim {
-    width: 100%; height: 220px; border-radius: 12px;
-    border: none; margin-top: 15px; background: #000;
+h3 { margin: 5px 0 15px 0; font-size: 1.6rem; font-weight: 700; }
+.topic-desc { color: #94a3b8; font-size: 0.95rem; margin-bottom: 20px; }
+
+.equation-block {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    font-size: 1.1rem;
 }
 
-/* 4. BUTTONS */
-.neon-toggle-btn {
-    background: transparent; border: 1px solid var(--chem);
-    color: var(--chem); padding: 6px 15px; border-radius: 20px;
-    cursor: pointer; transition: 0.3s; font-size: 0.8rem;
+/* Media Components */
+.media-stack { display: flex; flex-direction: column; gap: 20px; }
+
+.video-frame {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 18px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-.neon-toggle-btn:hover {
-    background: var(--chem); color: #000; box-shadow: 0 0 15px var(--chem);
+.sim-box {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 15px;
+    color: #1e293b;
 }
 
-#session-timer {
-    font-size: 0.75rem; border: 1px solid var(--phys);
-    padding: 4px 10px; border-radius: 5px; animation: pulse 3s infinite;
+.sim-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    margin: 0 0 10px 5px;
+    opacity: 0.6;
 }
 
-/* 5. FOOTER */
+.phet-sim {
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* Footer Section */
+.quantum-footer {
+    background: #010409;
+    border-top: 1px solid var(--border);
+    padding: 80px 40px;
+}
+
 .creator-badge {
-    border-left: 3px solid var(--phys); padding-left: 15px;
-    background: linear-gradient(90deg, rgba(59,130,246,0.1), transparent);
+    background: rgba(255,255,255,0.03);
+    border-left: 4px solid var(--phys);
+    font-size: 1.1rem;
+    padding: 15px 25px;
+    border-radius: 0 12px 12px 0;
+}
+
+@media (max-width: 768px) {
+    .grid-layout { grid-template-columns: 1fr; padding: 20px; }
+    .glass-nav { padding: 15px; }
+    .controls { flex-direction: column; gap: 10px; width: 100%; }
+}
+/* Add this to your existing styles.css */
+.download-btn {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid var(--bio);
+    color: var(--bio);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.download-btn:hover {
+    background: var(--bio);
+    color: white;
 }
