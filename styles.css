@@ -11,71 +11,98 @@ body {
     color: white;
     font-family: 'Inter', sans-serif;
     margin: 0;
+    overflow-x: hidden;
 }
 
+/* Particles Background */
+#particle-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+.particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: float linear infinite;
+}
+@keyframes float {
+    from { transform: translateY(0) translateX(0); }
+    to { transform: translateY(-100vh) translateX(50px); }
+}
+
+/* Login Gate */
+.login-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #1e293b, #020617);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+.glass-box {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    padding: 50px;
+    border-radius: 32px;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+}
+.dev-tag-mini { font-size: 0.6rem; opacity: 0.4; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; }
+
+/* Header & Timer */
 .glass-nav {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    position: sticky; top: 0; z-index: 1000;
     background: rgba(2, 6, 23, 0.9);
     backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--border);
-    padding: 15px;
+    padding: 15px 20px;
 }
+.nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.user-meta { display: flex; gap: 15px; align-items: center; margin-top: -5px; }
+#session-timer { font-size: 0.7rem; background: rgba(59, 130, 246, 0.2); color: var(--phys); padding: 2px 8px; border-radius: 4px; font-family: monospace; }
 
-.nav-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-h1 span { font-weight: 200; opacity: 0.5; }
-
-.controls input, .controls select {
-    background: #0f172a;
-    border: 1px solid var(--border);
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-    margin-left: 10px;
-}
-
+/* Grid Layout */
 .grid-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 30px;
-    padding: 40px 20px;
-    max-width: 1400px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 30px; padding: 40px;
 }
-
 .note-card {
-    background: rgba(255,255,255,0.03);
+    background: rgba(255,255,255,0.02);
     border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 24px; padding: 25px;
+    transition: 0.3s;
 }
+.note-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.05); }
 
-.note-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.3); }
+/* Footer - Malcom & Yens Branding */
+.quantum-footer {
+    background: #020617;
+    border-top: 1px solid var(--border);
+    padding: 60px 20px;
+    margin-top: 60px;
+}
+.footer-content {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+.main-credit h4 span { font-weight: 200; opacity: 0.5; }
+.creator-badge {
+    background: rgba(59, 130, 246, 0.1);
+    color: white; padding: 10px; border-radius: 8px;
+    border-left: 3px solid var(--phys);
+    margin: 15px 0;
+}
+.footer-links a { color: var(--phys); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+.footer-links a:hover { color: white; }
 
-.note-card.physics { border-top: 5px solid var(--phys); }
-.note-card.chemistry { border-top: 5px solid var(--chem); }
-.note-card.biology { border-top: 5px solid var(--bio); }
-
-.badge { font-size: 0.7rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; opacity: 0.6; }
-
-.equation-block { background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin: 15px 0; color: #94a3b8; }
-
-.video-frame { width: 100%; aspect-ratio: 16/9; border-radius: 15px; border: none; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
-.sim-box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; }
-.sim-label { font-size: 0.7rem; font-weight: bold; margin-bottom: 10px; color: #64748b; }
+/* Equations and Media */
+.equation-block { background: #000; padding: 15px; border-radius: 12px; margin: 15px 0; color: #94a3b8; }
+.video-frame { width: 100%; aspect-ratio: 16/9; border-radius: 15px; border: none; margin-bottom: 20px; }
 .phet-sim { width: 100%; height: 350px; border: none; border-radius: 10px; background: white; }
-
-@media (max-width: 500px) { .grid-layout { grid-template-columns: 1fr; } }
