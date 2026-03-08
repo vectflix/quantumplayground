@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Playground | Unified Suite</title>
+    <title>Quantum Playground | 2026 Academic Suite</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -25,53 +25,76 @@
         </div>
     </header>
 
-    <main id="content-grid" class="grid-layout"></main>
-
-    <script src="notes.js"></script>
-    <script src="videos.js"></script>
-    <script src="sims.js"></script>
+    <main id="content-grid" class="grid-layout">
+        </main>
 
     <script>
-        function buildLab() {
-            const grid = document.getElementById('content-grid');
-            grid.innerHTML = '';
+        // INTEGRATED DATA SOURCE (Zero External Loading Errors)
+        const DATA = [
+            // PHYSICS (1-9)
+            { id: 0, subject: "physics", title: "Kinematics & Motion", text: "The study of displacement, velocity, and acceleration.", math: "$$v = u + at$$ $$s = ut + \\frac{1}{2}at^2$$", yt: "rZ-p-pM8Y_Q", sim: "https://phet.colorado.edu/sims/html/moving-man/latest/moving-man_all.html" },
+            { id: 1, subject: "physics", title: "Newton's Laws", text: "Dynamics and the relationship between Force and Mass.", math: "$$F = ma$$ $$p = mv$$", yt: "kKKM8Y-u7ds", sim: "https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_all.html" },
+            { id: 2, subject: "physics", title: "Work & Energy", text: "Conservation of energy and mechanical work.", math: "$$KE = \\frac{1}{2}mv^2$$ $$PE = mgh$$", yt: "2WCT0W8Ljdg", sim: "https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_all.html" },
+            { id: 3, subject: "physics", title: "Gravitation", text: "Planetary motion and universal gravitational force.", math: "$$F = G\\frac{m_1m_2}{r^2}$$", yt: "kxkFaBA6qbc", sim: "https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_all.html" },
+            { id: 4, subject: "physics", title: "Thermodynamics", text: "Heat transfer and the ideal gas laws.", math: "$$PV = nRT$$ $$\\Delta U = Q - W$$", yt: "4i1_97_Z4P8", sim: "https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_all.html" },
+            { id: 5, subject: "physics", title: "Waves & Sound", text: "Properties of longitudinal and transverse waves.", math: "$$v = f\\lambda$$", yt: "TfYCnOvNnFU", sim: "https://phet.colorado.edu/sims/html/waves-intro/latest/waves-intro_all.html" },
+            { id: 6, subject: "physics", title: "Optics", text: "Light behavior, reflection, and refraction.", math: "$$n_1\\sin\\theta_1 = n_2\\sin\\theta_2$$", yt: "95V8ko59p40", sim: "https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_all.html" },
+            { id: 7, subject: "physics", title: "Circuits", text: "Ohm's Law and electrical power distribution.", math: "$$V = IR$$ $$P = IV$$", yt: "mc979OhitAg", sim: "https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_all.html" },
+            { id: 8, subject: "physics", title: "Quantum Physics", text: "Photon energy and the photoelectric effect.", math: "$$E = hf$$ $$E = mc^2$$", yt: "KWAsz59F8gA", sim: "https://phet.colorado.edu/sims/html/photoelectric-effect/latest/photoelectric-effect_all.html" },
             
-            window.NOTES_DATA.forEach((topic, i) => {
-                const card = document.createElement('article');
-                card.className = `note-card ${topic.subject}`;
-                card.setAttribute('data-subject', topic.subject);
-                
-                card.innerHTML = `
+            // CHEMISTRY (10-18)
+            { id: 9, subject: "chemistry", title: "Atomic Structure", text: "Subatomic particles and atomic mass.", math: "$$A = Z + N$$", yt: "h6LPAwA938Y", sim: "https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_all.html" },
+            { id: 10, subject: "chemistry", title: "Periodic Trends", text: "Electronegativity and atomic radius patterns.", math: "$$\\text{Trend: EN } \\uparrow \\to$$", yt: "0RRVV4Diomg", sim: "https://phet.colorado.edu/sims/html/periodic-trends/latest/periodic-trends_all.html" },
+            { id: 11, subject: "chemistry", title: "Molecular Shapes", text: "VSEPR theory and 3D molecular geometry.", math: "$$AX_4 = \\text{Tetrahedral}$$", yt: "Sk7W2Vgb6yY", sim: "https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_all.html" },
+            { id: 12, subject: "chemistry", title: "Stoichiometry", text: "Balancing equations and mole ratios.", math: "$$n = m/M$$", yt: "UL1jmJaUkaQ", sim: "https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers_all.html" },
+            { id: 13, subject: "chemistry", title: "States of Matter", text: "Phase changes and kinetic molecular theory.", math: "$$S \\to L \\to G$$", yt: "BY9VpZp_BTA", sim: "https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_all.html" },
+            { id: 14, subject: "chemistry", title: "Kinetics", text: "Reaction rates and activation energy.", math: "$$Rate = k[A]^x$$", yt: "7qOFtL3VEBc", sim: "https://phet.colorado.edu/sims/html/reactions-and-rates/latest/reactions-and-rates_all.html" },
+            { id: 15, subject: "chemistry", title: "Equilibrium", text: "Dynamic equilibrium and Le Chatelier's Principle.", math: "$$K_c = [P]/[R]$$", yt: "g5wNg_dKsYY", sim: "https://phet.colorado.edu/sims/html/reversible-reactions/latest/reversible-reactions_all.html" },
+            { id: 16, subject: "chemistry", title: "Acids & Bases", text: "The pH scale and neutralization reactions.", math: "$$pH = -\\log[H^+]$$", yt: "ANi709MYn60", sim: "https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_all.html" },
+            { id: 17, subject: "chemistry", title: "Molarity", text: "Concentration of solutes in solution.", math: "$$M = mol/L$$", yt: "UloIw7d9Hao", sim: "https://phet.colorado.edu/sims/html/molarity/latest/molarity_all.html" },
+
+            // BIOLOGY (19-27)
+            { id: 18, subject: "biology", title: "The Cell", text: "Functions of eukaryotic organelles.", math: "$$\\text{Nucleus: DNA Storage}$$", yt: "URUJD5NEXC8", sim: "https://phet.colorado.edu/sims/html/membrane-channels/latest/membrane-channels_all.html" },
+            { id: 19, subject: "biology", title: "Cell Transport", text: "Diffusion, osmosis, and active transport.", math: "$$\\text{ATP Required for Active}$$", yt: "Ptmlvtei8hw", sim: "https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_all.html" },
+            { id: 20, subject: "biology", title: "Cell Respiration", text: "Conversion of glucose into ATP energy.", math: "$$C_6H_{12}O_6 + 6O_2 \\to ATP$$", yt: "eJ9Zjc-jdys", sim: "https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_all.html" },
+            { id: 21, subject: "biology", title: "Photosynthesis", text: "Light-dependent and independent reactions.", math: "$$CO_2 + H_2O \\to C_6H_{12}O_6$$", yt: "sQK3Yr4Sc_k", sim: "https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_all.html" },
+            { id: 22, subject: "biology", title: "DNA Replication", text: "The semi-conservative copying of DNA.", math: "$$A-T, C-G$$", yt: "5qSrmeiWsuc", sim: "https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_all.html" },
+            { id: 23, subject: "biology", title: "Protein Synthesis", text: "Transcription and translation processes.", math: "$$DNA \\to RNA \\to \\text{Protein}$$", yt: "gG7uCskUOrA", sim: "https://phet.colorado.edu/sims/html/gene-expression-basics/latest/gene-expression-basics_all.html" },
+            { id: 24, subject: "biology", title: "Genetics", text: "Mendelian inheritance and Punnett squares.", math: "$$\\text{Ratio: 3:1 (Aa x Aa)}$$", yt: "Mehz7tCxjSE", sim: "https://phet.colorado.edu/sims/html/gene-machine-lac-operon/latest/gene-machine-lac-operon_all.html" },
+            { id: 25, subject: "biology", title: "Evolution", text: "Natural selection and adaptation mechanisms.", math: "$$p^2+2pq+q^2=1$$", yt: "hOfRN0KihOU", sim: "https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_all.html" },
+            { id: 26, subject: "biology", title: "Ecology", text: "Food webs and energy transfer in ecosystems.", math: "$$\\text{10% Energy Rule}$$", yt: "hLq2datPo5M", sim: "https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_all.html" }
+        ];
+
+        function render() {
+            const grid = document.getElementById('content-grid');
+            grid.innerHTML = DATA.map(topic => `
+                <article class="note-card ${topic.subject}" data-subject="${topic.subject}">
                     <div class="badge">${topic.subject}</div>
                     <h3>${topic.title}</h3>
-                    <div class="content-text">${topic.text}</div>
+                    <p>${topic.text}</p>
                     <div class="equation-block">${topic.math}</div>
-                    <iframe class="video-frame" src="https://www.youtube.com/embed/${window.VIDEOS_DATA[i].ytID}" loading="lazy" allowfullscreen></iframe>
+                    <iframe class="video-frame" src="https://www.youtube.com/embed/${topic.yt}" allowfullscreen></iframe>
                     <div class="sim-box">
-                        <p class="sim-label">🔬 Interactive Simulation</p>
-                        <iframe src="${window.SIMS_DATA[i].url}" class="phet-sim"></iframe>
+                        <p class="sim-label">🔬 LIVE LAB</p>
+                        <iframe src="${topic.sim}" class="phet-sim"></iframe>
                     </div>
-                `;
-                grid.appendChild(card);
-            });
+                </article>
+            `).join('');
+            if (window.MathJax) MathJax.typeset();
         }
 
         function filterContent() {
             const query = document.getElementById('searchBar').value.toLowerCase();
             const subject = document.getElementById('subjectFilter').value;
-            const cards = document.querySelectorAll('.note-card');
-
-            cards.forEach(card => {
+            document.querySelectorAll('.note-card').forEach(card => {
                 const text = card.innerText.toLowerCase();
-                const cardSubject = card.getAttribute('data-subject');
-                const matchesSearch = text.includes(query);
-                const matchesSubject = subject === 'all' || cardSubject === subject;
-                
-                card.style.display = (matchesSearch && matchesSubject) ? 'flex' : 'none';
+                const cardSub = card.getAttribute('data-subject');
+                const show = text.includes(query) && (subject === 'all' || cardSub === subject);
+                card.style.display = show ? 'flex' : 'none';
             });
         }
 
-        window.onload = buildLab;
+        window.onload = render;
     </script>
 </body>
 </html>
